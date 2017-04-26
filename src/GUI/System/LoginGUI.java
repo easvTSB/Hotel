@@ -86,7 +86,7 @@ public class LoginGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\LPNielsen\\Google Drive\\new Netbeans\\NetBeansProjects\\Project\\login.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon("src\\login.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

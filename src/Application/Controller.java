@@ -5,39 +5,39 @@ package Application;
  */
 public class Controller {
 
-    private String createCusBooking(){
+    public String createCusBooking(){
 
-        String resultMessage = DBFacade method here;
+        String resultMessage = "";// = DBFacade method here
         return resultMessage;
     }
 
-    private String createBooking(){
+    public String createBooking(){
 
-        String resultMessage = DBFacade method here;
+        String resultMessage = "";// = DBFacade method here
         return resultMessage;
     }
 
-    private String createCusArrangement(){
+    public String createCusArrangement(){
 
-        String resultMessage = DBFacade method here;
+        String resultMessage = "";// = DBFacade method here
         return resultMessage;
     }
 
-    private String createArrangement(){
+    public String createArrangement(){
 
-        String resultMessage = DBFacade method here;
+        String resultMessage = "";// = DBFacade method here
         return resultMessage;
     }
 
-    private String createCusCatering(){
+    public String createCusCatering(){
 
-        String resultMessage = DBFacade method here;
+        String resultMessage = "";// = DBFacade method here
         return resultMessage;
     }
 
-    private String createCatering(){
+    public String createCatering(){
 
-        String resultMessage = DBFacade method here;
+        String resultMessage = "";// = DBFacade method here
         return resultMessage;
     }
 

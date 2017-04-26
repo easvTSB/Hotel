@@ -7,6 +7,7 @@ package GUI.Frames;
 
 import Application.Controller;
 
+import javax.swing.*;
 import java.awt.CardLayout;
 
 /**
@@ -1105,7 +1106,10 @@ public class CreateFrame extends javax.swing.JInternalFrame {
 
     private void creButtonBookCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonBookCreateActionPerformed
         if(creFieldCusID.getText().equalsIgnoreCase("customer id")){
-            controller.
+            String resultMessage = controller.createCusBooking();
+            JOptionPane.showMessageDialog(crePanelBook,resultMessage);
+        }else{
+
         }
 
     }//GEN-LAST:event_creButtonBookCreateActionPerformed

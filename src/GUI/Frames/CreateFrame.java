@@ -870,6 +870,10 @@ public class CreateFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void setCreRButtonArrActionPerformed(java.awt.event.ActionEvent evt){
+        if(creFieldCusID.getText().equalsIgnoreCase(""))
+    }
+
     private void creRButtonArrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creRButtonArrActionPerformed
         // TODO add your handling code here:
         cl.show(creCPanelEvent,"crePanelArr");
@@ -1090,19 +1094,25 @@ public class CreateFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_creButtonArrSearchActionPerformed
 
     private void creButtonArrCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonArrCreateActionPerformed
-        // TODO add your handling code here:
+
+
+
+
     }//GEN-LAST:event_creButtonArrCreateActionPerformed
 
     private void creButtonBookSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonBookSearchActionPerformed
-        // TODO add your handling code here:
+
+
+
     }//GEN-LAST:event_creButtonBookSearchActionPerformed
 
     private void creButtonBookCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonBookCreateActionPerformed
-        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_creButtonBookCreateActionPerformed
 
     private void creButtonCatCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonCatCreateActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_creButtonCatCreateActionPerformed
 
 

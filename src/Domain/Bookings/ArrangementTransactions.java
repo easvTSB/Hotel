@@ -1,4 +1,4 @@
-package Domain;
+package Domain.Bookings;
 
 public class ArrangementTransactions {
     private int arrangementID;

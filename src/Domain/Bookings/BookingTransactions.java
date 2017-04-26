@@ -1,4 +1,4 @@
-package Domain;
+package Domain.Bookings;
 
 /**
  * Created by Sebas on 24-04-2017.

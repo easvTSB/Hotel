@@ -12,6 +12,35 @@ public class Customer {
     private String address;
     private int zip;
 
+    /**
+     * Constructor used for creating new customers.
+     * @param fName
+     * @param lName
+     * @param mail
+     * @param phoneNo
+     * @param address
+     * @param zip
+     */
+    public Customer(String fName, String lName, String mail, String phoneNo, String address, int zip) {
+        this.id = id;
+        this.fName = fName;
+        this.lName = lName;
+        this.mail = mail;
+        this.phoneNo = phoneNo;
+        this.address = address;
+        this.zip = zip;
+    }
+
+    /**
+     * Constructor for already existing customer.
+     * @param id
+     * @param fName
+     * @param lName
+     * @param mail
+     * @param phoneNo
+     * @param address
+     * @param zip
+     */
     public Customer(int id, String fName, String lName, String mail, String phoneNo, String address, int zip) {
         this.id = id;
         this.fName = fName;

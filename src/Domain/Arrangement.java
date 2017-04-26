@@ -1,5 +1,8 @@
 package Domain;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Created by Sebas on 26-04-2017.
  */
@@ -13,7 +16,36 @@ public class Arrangement {
     private String comment;
     private double totalPrice;
 
-    public Arrangement(int arrangementID, String eventType, String customerID, String staffID, String dayOrderPlaced, boolean isPaid, String comment) {
+    /**
+     * Constructor used for creating a new Arrangement
+     * @param eventType
+     * @param customerID
+     * @param staffID
+     * @param isPaid
+     * @param comment
+     */
+    public Arrangement(String eventType, String customerID, String staffID, boolean isPaid, String comment) {
+        this.eventType = eventType;
+        this.customerID = customerID;
+        this.staffID = staffID;
+        LocalDate localDate = LocalDate.now();
+        this.dayOrderPlaced = DateTimeFormatter.ofPattern("yyy-MM-dd").format(localDate);
+        this.isPaid = isPaid;
+        this.comment = comment;
+    }
+
+    /**
+     * Constructor for already existing arrangement
+     * @param arrangementID
+     * @param eventType
+     * @param customerID
+     * @param staffID
+     * @param dayOrderPlaced
+     * @param isPaid
+     * @param comment
+     */
+    public Arrangement(int arrangementID, String eventType, String customerID, String staffID, String dayOrderPlaced,
+                       boolean isPaid, String comment) {
         this.arrangementID = arrangementID;
         this.eventType = eventType;
         this.customerID = customerID;

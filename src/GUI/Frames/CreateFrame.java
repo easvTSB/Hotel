@@ -871,7 +871,7 @@ public class CreateFrame extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setCreRButtonArrActionPerformed(java.awt.event.ActionEvent evt){
-        if(creFieldCusID.getText().equalsIgnoreCase(""))
+        if(creFieldCusID.getText().equalsIgnoreCase(""));
     }
 
     private void creRButtonArrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creRButtonArrActionPerformed

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 /**
  * Created by Martynas on 2017-04-24.
  */
-public class StaffDB extends MainJDBC {
+public class StaffDB extends DBFacade {
 
     private int staff_ID;
     private String staff_FName;

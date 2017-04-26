@@ -7,7 +7,7 @@ import java.sql.Time;
 /**
  * Created by Martynas on 2017-04-25.
  */
-public class RoomService extends MainJDBC {
+public class RoomService extends DBFacade {
 
     private long roomservice_ID;
     private long booking_ID;

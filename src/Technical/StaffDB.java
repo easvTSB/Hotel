@@ -1,5 +1,9 @@
 package Technical;
 
+import Application.Creator;
+import Domain.Account;
+
+import javax.swing.*;
 import java.sql.Date;
 import java.sql.SQLException;
 
@@ -8,7 +12,6 @@ import java.sql.SQLException;
  */
 public class StaffDB extends DBFacade {
 
-    private int staff_ID;
     private String staff_FName;
     private String staff_LName;
     private String staff_PhoneNo;
@@ -17,25 +20,24 @@ public class StaffDB extends DBFacade {
     private String staff_Address;
     private int city_Zip;
     private String jobtitle_Occupation;
+    private static String username;
+    private static String password;
 
     public StaffDB () throws SQLException{
     }
 
-    public void createStaffMember (int staff_ID,String staff_FName,String staff_LName,
-                                   String staff_PhoneNo,String staff_Mail,Date staff_StarteDate,
-                                   String staff_Address,int city_Zip,String jobtitle_Occupation) throws SQLException{
-        this.staff_ID = staff_ID;
+    public void createStaffMember(String staff_FName, String staff_LName,
+                                  String staff_PhoneNo, String staff_Mail,
+                                  String staff_Address, int city_Zip, String jobtitle_Occupation) throws SQLException{
         this.staff_FName = staff_FName;
         this.staff_LName = staff_LName;
         this.staff_PhoneNo = staff_PhoneNo;
         this.staff_Mail = staff_Mail;
-        this.staff_StarteDate = staff_StarteDate;
         this.staff_Address = staff_Address;
         this.city_Zip = city_Zip;
         this.jobtitle_Occupation = jobtitle_Occupation;
 
-        cs = con.prepareCall("{call CreateStaffMember(?,?,?,?,?,?,?,?,?)}");
-        cs.setInt(1,staff_ID);
+        cs = con.prepareCall("{call CreateStaffMember(?,?,?,?,?,?,?,?)}");
         cs.setString(2,staff_FName);
         cs.setString(3,staff_LName);
         cs.setString(4,staff_PhoneNo);
@@ -44,8 +46,26 @@ public class StaffDB extends DBFacade {
         cs.setString(7,staff_Address);
         cs.setInt(8,city_Zip);
         cs.setString(9,jobtitle_Occupation);
-
         cs.execute();
+
+        generateAccount();
+    }
+
+    private void generateAccount() throws SQLException {
+        ps = con.prepareStatement("insert into Account values (?,?,?)");
+        ps.setString(1, Account.getUserName());
+        ps.setString(2, Account.getPassword());
+        ps.setString(4, Account.getUserLevel());
+        ps.execute();
+        ps.close();
+    }
+
+    public Account createStaffAccount(JTextField fname,JTextField lname,JComboBox comboBox) {
+        Account.setUserName(fname.getText(),lname.getText());
+        Account.setPassword();
+        username = Account.getUserName();
+        password = Account.getPassword();
+        return Creator.createStaffAccount(username,password,comboBox.getSelectedItem().toString());
     }
 
     public void deleteStaffMember (int staff_ID) throws SQLException{

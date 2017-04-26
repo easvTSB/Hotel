@@ -24,12 +24,14 @@ public class LoginController {
     private static String userLevel;
 
     public boolean getLoginVerification(Account account) throws SQLException {
-        PreparedStatement ps = dbFacade.createStatement("SELECT user_UserName, user_Password FROM Account");
+        PreparedStatement ps = dbFacade.createStatement("SELECT user_UserName, user_Password, userlevel_UserType  FROM Account");
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             username = rs.getString("user_UserName");
             password = rs.getString("user_Password");
+            userLevel = rs.getString("userlevel_UserType");
             if (username.equals(account.getUserName()) && password.equals(account.getPassword())){
+
                 rs.close();
                 return true;
             }
@@ -38,13 +40,7 @@ public class LoginController {
         return false;
     }
 
-    public String getUserLevel() throws SQLException {
-        PreparedStatement ps = dbFacade.createStatement("SELECT userlevel_UserType FROM Account WHERE staff_ID=1");
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            userLevel = rs.getString("userlevel_UserType");
-        }
-        rs.close();
+    public String getUserLevel() {
         return userLevel;
     }
 

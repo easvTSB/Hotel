@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Catering {
     private int cateringOrderID;
-    private int customerID;
+    private long customerID;
     private int staffID;
     private String deliveryAddress;
     private int zip;
@@ -69,7 +69,7 @@ public class Catering {
         return cateringOrderID;
     }
 
-    public int getCustomerID() {
+    public long getCustomerID() {
         return customerID;
     }
 

@@ -1,5 +1,7 @@
 package Technical;
 
+import Domain.Bookings.BookingTransactions;
+
 import java.sql.Date;
 import java.sql.SQLException;
 
@@ -37,6 +39,10 @@ public class BookingDB extends DBFacade {
         cs.setString(6,booking_Comment);
 
         cs.execute();
+    }
+
+    public void createBookingTransaction(BookingTransactions bt){
+
     }
 
     public void deleteBooking (long booking_ID) throws SQLException{

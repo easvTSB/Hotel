@@ -20,28 +20,6 @@ public class CustomerDB extends DBFacade {
 
     }
 
-    public void createCustomer (long customer_ID,String customer_FName,String customer_LName,
-                                String customer_Mail,String customer_PhoneNo,String customer_Address,
-                                int city_Zip) throws SQLException{
-        this.customer_ID = customer_ID;
-        this.customer_FName = customer_FName;
-        this.customer_LName = customer_LName;
-        this.customer_Mail = customer_Mail;
-        this.customer_PhoneNo = customer_PhoneNo;
-        this.customer_Address = customer_Address;
-        this.city_Zip = city_Zip;
-
-        cs = con.prepareCall("{call CreateBooking(?,?,?,?,?,?)}");
-        cs.setLong(1,customer_ID);
-        cs.setString(2,customer_FName);
-        cs.setString(3,customer_LName);
-        cs.setString(4,customer_Mail);
-        cs.setString(5,customer_PhoneNo);
-        cs.setString(6,customer_Address);
-        cs.setInt(7,city_Zip);
-
-        cs.execute();
-    }
 
     public void deleteCustomer (long customer_ID) throws SQLException{
         cs = con.prepareCall("{call DeleteCustomer(?)}");

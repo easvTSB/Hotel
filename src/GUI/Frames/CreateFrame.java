@@ -9,6 +9,8 @@ import Application.Controller;
 
 import javax.swing.*;
 import java.awt.CardLayout;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,15 +18,14 @@ import java.awt.CardLayout;
  */
 public class CreateFrame extends javax.swing.JInternalFrame {
     private CardLayout cl;
-    private Controller controller;
+    private Controller con;
     /**
      * Creates new form CreateFrame
      */
-    public CreateFrame(Controller con) {
+    public CreateFrame(Controller controller) {
         initComponents();
-        controller = con;
+        con = controller;
         cl = new CardLayout();
-        controller = con;
         creCPanelEvent.setLayout(cl);
         creCPanelEvent.add("crePanelArr",crePanelArr);
         creCPanelEvent.add("crePanelBook",crePanelBook);
@@ -1104,12 +1105,30 @@ public class CreateFrame extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_creButtonBookSearchActionPerformed
 
-    private void creButtonBookCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonBookCreateActionPerformed
-        if(creFieldCusID.getText().equalsIgnoreCase("customer id")){
-            String resultMessage = controller.createCusBooking();
-            JOptionPane.showMessageDialog(crePanelBook,resultMessage);
-        }else{
+    private void creButtonBookCreateActionPerformed(java.awt.event.ActionEvent evt)  {//GEN-FIRST:event_creButtonBookCreateActionPerformed
 
+        String checkIn = creFieldBookDateFrom.getText();
+        String checkOut = creFieldBookDateTo.getText();
+        String comment = creTAreaBookComment.getText();
+
+        //ArrayList for checking the current code...
+        ArrayList<String> testArray = new ArrayList<>();
+        testArray.add("101");
+        testArray.add("102");
+
+        if(creFieldCusID.getText().equalsIgnoreCase("customer id")){
+            String fName = creFieldFName.getText();
+            String lName = creFieldLName.getText();
+            String mail = creFieldEmail.getText();
+            String phoneNo = creFieldPhoneNo.getText();
+            String address = creFieldAddress.getText();
+            int zip = Integer.parseInt(creFieldZIP.getText());
+
+            con.createCusBooking(fName,lName,mail,phoneNo,address,zip,checkIn,checkOut,comment,testArray);
+        }else{
+            long customerID = Long.parseLong(creFieldCusID.getText());
+
+            con.createBooking(customerID,checkIn,checkOut,comment,testArray);
         }
 
     }//GEN-LAST:event_creButtonBookCreateActionPerformed

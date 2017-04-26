@@ -1,44 +1,78 @@
 package Application;
 
+import Domain.*;
+import Domain.Bookings.Booking;
+import Domain.Bookings.BookingTransactions;
+import Technical.*;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  * Created by LPNielsen on 26-Apr-17.
  */
 public class Controller {
+    private DBFacade db = new DBFacade();
 
-    private String createCusBooking(){
+    /**
+     * Creates a new customer with bookings.
+     * @param firstName
+     * @param lastName
+     * @param mail
+     * @param phone
+     * @param address
+     * @param zip
+     * @param checkIn
+     * @param checkout
+     * @param comment
+     * @param roomsBooked
+     * @throws SQLException
+     */
+    public void createCusBooking(String firstName, String lastName, String mail, String phone, String address, int zip,
+                                   String checkIn, String checkout,String comment, ArrayList<String> roomsBooked)  {
 
-        String resultMessage = DBFacade method here;
-        return resultMessage;
+        db.createCustomer(new Customer(firstName,lastName,mail,phone,address,zip));
+        db.createBookingCus(new Booking(1,false,comment));
+        for(int i = 0 ; i < roomsBooked.size(); i++){
+            db.createBookingTransactionCus(new BookingTransactions(roomsBooked.get(i),checkIn,checkout));
+        }
     }
 
-    private String createBooking(){
+    /**
+     * Creates booking with existing customer.
+     * @param customerID
+     * @param checkIn
+     * @param checkOut
+     * @param comment
+     * @param roomsBooked
+     */
+    public void createBooking(long customerID, String checkIn, String checkOut,String comment, ArrayList<String> roomsBooked)  {
 
-        String resultMessage = DBFacade method here;
-        return resultMessage;
+        db.createBooking(new Booking(1,false,comment),customerID);
+        for(int i = 0 ; i < roomsBooked.size(); i++){
+            db.createBookingTransactionCus(new BookingTransactions(roomsBooked.get(i),checkIn,checkOut));
+        }
+
     }
 
-    private String createCusArrangement(){
+    public void createCusArrangement(){
 
-        String resultMessage = DBFacade method here;
-        return resultMessage;
+
     }
 
-    private String createArrangement(){
+    private void createArrangement(){
 
-        String resultMessage = DBFacade method here;
-        return resultMessage;
+
     }
 
-    private String createCusCatering(){
+    private void createCusCatering(){
 
-        String resultMessage = DBFacade method here;
-        return resultMessage;
+
     }
 
-    private String createCatering(){
+    private void createCatering(){
 
-        String resultMessage = DBFacade method here;
-        return resultMessage;
+
     }
 
 }

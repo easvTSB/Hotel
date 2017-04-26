@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Booking {
     private int bookingID;
-    private int customerID;
+    private long customerID;
     private int staffID;
     private String bookingDate;
     private double totalPrice;
@@ -17,13 +17,11 @@ public class Booking {
 
     /**
      * Constructor used for a new booking.
-     * @param customerID
      * @param staffID
      * @param paid
      * @param comment
      */
-    public Booking(int customerID, int staffID, boolean paid, String comment) {
-        this.customerID = customerID;
+    public Booking(int staffID, boolean paid, String comment) {
         this.staffID = staffID;
         LocalDate localDate = LocalDate.now();
         this.bookingDate = DateTimeFormatter.ofPattern("yyy-MM-dd").format(localDate);
@@ -55,7 +53,7 @@ public class Booking {
         return bookingID;
     }
 
-    public int getCustomerID() {
+    public long getCustomerID() {
         return customerID;
     }
 

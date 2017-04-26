@@ -4,7 +4,7 @@ package Domain;
  * Created by Sebas on 26-04-2017.
  */
 public class Customer {
-    private int id;
+    private long id;
     private String fName;
     private String lName;
     private String mail;
@@ -41,7 +41,7 @@ public class Customer {
      * @param address
      * @param zip
      */
-    public Customer(int id, String fName, String lName, String mail, String phoneNo, String address, int zip) {
+    public Customer(long id, String fName, String lName, String mail, String phoneNo, String address, int zip) {
         this.id = id;
         this.fName = fName;
         this.lName = lName;
@@ -51,7 +51,7 @@ public class Customer {
         this.zip = zip;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

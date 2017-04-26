@@ -6,12 +6,16 @@ import Domain.Account;
 import javax.swing.*;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Created by Martynas on 2017-04-24.
  */
 public class StaffDB extends DBFacade {
-
+    private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+    private static LocalDate Date = LocalDate.now();
+    private static String localDate = dtf.format(Date);
     private String staff_FName;
     private String staff_LName;
     private String staff_PhoneNo;
@@ -22,9 +26,6 @@ public class StaffDB extends DBFacade {
     private String jobtitle_Occupation;
     private static String username;
     private static String password;
-
-    public StaffDB () throws SQLException{
-    }
 
     public void createStaffMember(String staff_FName, String staff_LName,
                                   String staff_PhoneNo, String staff_Mail,
@@ -38,26 +39,26 @@ public class StaffDB extends DBFacade {
         this.jobtitle_Occupation = jobtitle_Occupation;
 
         cs = con.prepareCall("{call CreateStaffMember(?,?,?,?,?,?,?,?)}");
-        cs.setString(2,staff_FName);
-        cs.setString(3,staff_LName);
-        cs.setString(4,staff_PhoneNo);
-        cs.setString(5,staff_Mail);
-        cs.setDate(6,staff_StarteDate);
-        cs.setString(7,staff_Address);
-        cs.setInt(8,city_Zip);
-        cs.setString(9,jobtitle_Occupation);
+        cs.setString(1,staff_FName);
+        cs.setString(2,staff_LName);
+        cs.setString(3,staff_PhoneNo);
+        cs.setString(4,staff_Mail);
+        cs.setString(5,localDate);
+        cs.setString(6,staff_Address);
+        cs.setInt(7,city_Zip);
+        cs.setString(8,jobtitle_Occupation);
         cs.execute();
 
         generateAccount();
     }
 
     private void generateAccount() throws SQLException {
-        ps = con.prepareStatement("insert into Account values (?,?,?)");
-        ps.setString(1, Account.getUserName());
-        ps.setString(2, Account.getPassword());
-        ps.setString(4, Account.getUserLevel());
-        ps.execute();
-        ps.close();
+        cs = con.prepareCall("{call CreateAccount(?,?,?)}");
+        cs.setString(1, Account.getUserName());
+        cs.setString(2, Account.getPassword());
+        cs.setString(4, Account.getUserLevel());
+        cs.execute();
+        cs.close();
     }
 
     public Account createStaffAccount(JTextField fname,JTextField lname,JComboBox comboBox) {

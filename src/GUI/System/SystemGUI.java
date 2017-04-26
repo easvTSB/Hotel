@@ -257,9 +257,6 @@ public class SystemGUI extends javax.swing.JFrame {
         desktop.add(s);
         s.setVisible(true);
     }//GEN-LAST:event_jMenuServiceOpenActionPerformed
-    public void closeFrames(){
-        
-    }
 
     public void adminView(){
         jMenuManage.setEnabled(true);

@@ -4,12 +4,12 @@ import java.sql.*;
 
 public class DBFacade {
     private String userName = "sa";
-    private String password = "123456";
+    private String password = "8520";
     private String port = "1433";
     private String databaseName = "Hotel";
-    private Connection con;
+    public Connection con;
     private PreparedStatement ps;
-    private CallableStatement cl;
+    public CallableStatement cs;
 
     public DBFacade() {
         openConnection();
@@ -33,8 +33,8 @@ public class DBFacade {
     }
 
     public CallableStatement createCallable(String sql) throws SQLException {
-        cl = con.prepareCall(sql);
-        return cl;
+        cs = con.prepareCall(sql);
+        return cs;
     }
 
     private void closeConnection() {

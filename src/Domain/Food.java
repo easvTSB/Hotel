@@ -1,6 +1,7 @@
 package Domain;
 
 import Technical.DBFacade;
+import Technical.FoodDB;
 
 import java.sql.CallableStatement;
 import java.sql.SQLException;
@@ -12,20 +13,16 @@ public class Food {
     private static DBFacade dbFacade = new DBFacade();
     private static String name;
     private static String desc;
-    private static int price;
+    private static double price;
+    private FoodDB foodDB = new FoodDB();
 
-    public Food(String name, String desc, int price) {
+    public Food(String name, String desc, double price) throws SQLException{
         Food.name = name;
         Food.desc = desc;
         Food.price = price;
     }
 
-    public static void createFood() throws SQLException {
-        CallableStatement cl = dbFacade.createCallable("insert into Food values (?,?,?)");
-        cl.setString(1, name);
-        cl.setString(2, desc);
-        cl.setInt(3, price);
-        cl.execute();
-        cl.close();
+    public void createFood() throws SQLException {
+        foodDB.addFood(name,desc,price);
     }
 }

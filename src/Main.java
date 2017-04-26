@@ -10,5 +10,6 @@ public class Main {
         LoginGUI gg = new LoginGUI(new LoginController(),new SystemGUI());
         gg.setVisible(true);
 
+        System.out.println("how are you");
     }
 }

@@ -4,6 +4,8 @@ import Domain.Account;
 import Domain.Food;
 import Domain.Staff;
 
+import java.sql.SQLException;
+
 /**
  * Created by LPNielsen on 25-Apr-17.
  */
@@ -25,7 +27,7 @@ public class Creator {
         return tempStaff;
     }
 
-    public static Food createFood(String name, String desc, int price){
+    public static Food createFood(String name, String desc, int price) throws SQLException {
         Food tempFood = new Food(name,desc,price);
         return tempFood;
     }

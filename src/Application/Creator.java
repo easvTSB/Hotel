@@ -21,8 +21,7 @@ public class Creator {
         return tempAccount;
     }
 
-    public static Staff createStaff(String fName, String lName, String phoneNo, String email,
-                                    String address, int zipCode, String jobTitle){
+    public static Staff createStaff(String fName, String lName, String phoneNo, String email, String address, int zipCode, String jobTitle){
         Staff tempStaff = new Staff(fName,lName,phoneNo,email,address,zipCode,jobTitle);
         return tempStaff;
     }

@@ -232,7 +232,7 @@ public class SystemGUI extends javax.swing.JFrame {
 
     private void jMenuCreateOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCreateOpenActionPerformed
         // TODO add your handling code here:
-        CreateFrame cr = new CreateFrame();
+        CreateFrame cr = new CreateFrame(control);
         desktop.add(cr);
         cr.setVisible(true);
     }//GEN-LAST:event_jMenuCreateOpenActionPerformed
@@ -257,9 +257,6 @@ public class SystemGUI extends javax.swing.JFrame {
         desktop.add(s);
         s.setVisible(true);
     }//GEN-LAST:event_jMenuServiceOpenActionPerformed
-    public void closeFrames(){
-        
-    }
 
     public void adminView(){
         jMenuManage.setEnabled(true);

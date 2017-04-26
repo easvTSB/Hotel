@@ -5,6 +5,8 @@
  */
 package GUI.Frames;
 
+import Application.Controller;
+
 import java.awt.CardLayout;
 
 /**
@@ -13,12 +15,14 @@ import java.awt.CardLayout;
  */
 public class CreateFrame extends javax.swing.JInternalFrame {
     private CardLayout cl;
+    private Controller controller;
     /**
      * Creates new form CreateFrame
      */
-    public CreateFrame() {
+    public CreateFrame(Controller con) {
         initComponents();
         cl = new CardLayout();
+        controller = con;
         creCPanelEvent.setLayout(cl);
         creCPanelEvent.add("crePanelArr",crePanelArr);
         creCPanelEvent.add("crePanelBook",crePanelBook);

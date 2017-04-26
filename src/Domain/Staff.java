@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class Staff {
     private static DBFacade dbFacade = new DBFacade();
     private static LocalDate localDate = LocalDate.now();
-    private static int number = 7;
+    private static int number = 8;
     private static String fName;
     private static String lName;
     private static String phoneNo;
@@ -30,27 +30,5 @@ public class Staff {
         Staff.address = address;
         Staff.zipCode = zipCode;
         Staff.jobTitle = jobTitle;
-    }
-
-    public static void createEmployee(Account staffAccount) throws SQLException {
-        PreparedStatement ps = dbFacade.createStatement("insert into Staff values (?,?,?,?,?,?,?,?,?)");
-        ps.setInt(1, number);
-        ps.setString(2, fName);
-        ps.setString(3, lName);
-        ps.setString(4, phoneNo);
-        ps.setString(5, email);
-        ps.setString(6, localDate.toString());
-        ps.setString(7, address);
-        ps.setInt(8, zipCode);
-        ps.setString(9, jobTitle);
-        ps.execute();
-
-        ps = dbFacade.createStatement("insert into Account values (?,?,?,?)");
-        ps.setString(1, staffAccount.getUserName());
-        ps.setString(2, staffAccount.getPassword());
-        ps.setInt(3, number);
-        ps.setString(4, staffAccount.getUserLevel());
-        ps.execute();
-        ps.close();
     }
 }

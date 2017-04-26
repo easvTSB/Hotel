@@ -5,16 +5,21 @@
  */
 package GUI.Frames;
 
+import Domain.Staff;
+import Technical.StaffDB;
+
+import java.sql.SQLException;
+
 /**
  *
  * @author LPNielsen
  */
 public class EmployeeFrame extends javax.swing.JInternalFrame {
-
+    StaffDB staffDB = new StaffDB();
     /**
      * Creates new form Frame1
      */
-    public EmployeeFrame() {
+    public EmployeeFrame() throws SQLException {
         initComponents();
     }
 
@@ -256,7 +261,11 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         empButtonCreate.setText("Create");
         empButtonCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                empButtonCreateActionPerformed(evt);
+                try {
+                    empButtonCreateActionPerformed(evt);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -574,8 +583,16 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_empFieldCreateZIPFocusLost
 
-    private void empButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empButtonCreateActionPerformed
-        // TODO add your handling code here:
+    private void empButtonCreateActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_empButtonCreateActionPerformed
+        String empFName = empFieldCreateFName.getText();
+        String empLName = empFieldCreateLName.getText();
+        String empPhoneno = empFieldCreatePhoneNo.getText();
+        String empEmail = empFieldCreateEmail.getText();
+        String empAddress = empFieldCreateAddress.getText();
+        String empZIP = empFieldCreateZIP.getText();
+        String empTitle = empCBOXTitle.getSelectedItem().toString();
+
+        staffDB.createStaffMember(empFName,empLName,empPhoneno,empEmail,empAddress,Integer.parseInt(empZIP),empTitle);
     }//GEN-LAST:event_empButtonCreateActionPerformed
 
 

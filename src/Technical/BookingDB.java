@@ -6,7 +6,7 @@ import java.sql.SQLException;
 /**
  * Created by Martynas on 2017-04-24.
  */
-public class BookingDB extends MainJDBC {
+public class BookingDB extends DBFacade {
 
     private long booking_ID;
     private long customer_ID;

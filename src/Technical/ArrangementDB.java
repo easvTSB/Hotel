@@ -6,7 +6,7 @@ import java.sql.SQLException;
 /**
  * Created by Martynas on 2017-04-24.
  */
-public class ArrangementDB extends MainJDBC {
+public class ArrangementDB extends DBFacade {
 
     private long arrangement_ID;
     private String event_Type;

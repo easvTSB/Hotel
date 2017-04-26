@@ -16,6 +16,8 @@ import GUI.Frames.JobsFrame;
 import GUI.Frames.MenuFrame;
 import GUI.Frames.ServiceFrame;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author LPNielsen
@@ -99,7 +101,11 @@ public class SystemGUI extends javax.swing.JFrame {
         jMenuManageEmp.setText("Employee");
         jMenuManageEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuManageEmpActionPerformed(evt);
+                try {
+                    jMenuManageEmpActionPerformed(evt);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
         jMenuManage.add(jMenuManageEmp);
@@ -195,7 +201,7 @@ public class SystemGUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jMenuFileExitActionPerformed
 
-    private void jMenuManageEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuManageEmpActionPerformed
+    private void jMenuManageEmpActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jMenuManageEmpActionPerformed
         // TODO add your handling code here:
         EmployeeFrame e = new EmployeeFrame();
         desktop.add(e);

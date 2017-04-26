@@ -10,8 +10,6 @@ import java.time.LocalDate;
  * Created by LPNielsen on 25-Apr-17.
  */
 public class Staff {
-    private static DBFacade dbFacade = new DBFacade();
-    private static LocalDate localDate = LocalDate.now();
     private static int number = 8;
     private static String fName;
     private static String lName;

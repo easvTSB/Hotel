@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * @author LPNielsen
  */
 public class EmployeeFrame extends javax.swing.JInternalFrame {
-    StaffDB staffDB = new StaffDB();
+    StaffDB staffDB;
     /**
      * Creates new form Frame1
      */
@@ -592,6 +592,7 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         String empZIP = empFieldCreateZIP.getText();
         String empTitle = empCBOXTitle.getSelectedItem().toString();
 
+        staffDB = new StaffDB();
         staffDB.createStaffMember(empFName,empLName,empPhoneno,empEmail,empAddress,Integer.parseInt(empZIP),empTitle);
     }//GEN-LAST:event_empButtonCreateActionPerformed
 

@@ -27,7 +27,7 @@ public class Account {
         this.lName = LName;
         this.userLevel = userLevel;
 
-        generateUsername(lName,fName);
+        generateUsername(fName,lName);
         generatePassword();
     }
 

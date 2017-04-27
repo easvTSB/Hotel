@@ -9,7 +9,7 @@ import java.sql.*;
 
 public class DBFacade {
     private String userName = "sa";
-    private String password = "123456";
+    private String password = "seba0830";
     private String port = "1433";
     private String databaseName = "Hotel";
     public Connection con;
@@ -145,7 +145,7 @@ public class DBFacade {
 
     public void createArrangementTransactionCus(ArrangementTransactions arrT) {
         try {
-            cs = con.prepareCall("{call InsertArrangementTransaction(?,?,?,?)}");
+            cs = con.prepareCall("{call InsertArrangementTransaction(?,?)}");
             cs.setString(1, arrT.getRoomNo());
             cs.setString(2, arrT.getEventDate());
 
@@ -157,11 +157,41 @@ public class DBFacade {
     }
 
     public void createCatering(Catering c, long customerID){
+        try {
+            cs = con.prepareCall("{call insert_catering(?,?,?,?,?,?,?,?,?)}");
+            cs.setLong(1,customerID);
+            cs.setInt(2,c.getStaffID());
+            cs.setString(3,c.getDeliveryAddress());
+            cs.setInt(4,c.getZip());
+            cs.setInt(5,c.getPeopleQuantity());
+            cs.setString(6,c.getDateOrdered());
+            cs.setString(7,c.getDeliveryDate());
+            cs.setBoolean(8,c.isPaid());
+            cs.setString(9,c.getComment());
 
+            cs.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void createCateringCus(Catering c){
+        try {
+            cs = con.prepareCall("{call insert_cateringCus(?,?,?,?,?,?,?,?)}");
+            cs.setInt(1,c.getStaffID());
+            cs.setString(2,c.getDeliveryAddress());
+            cs.setInt(3,c.getZip());
+            cs.setInt(4,c.getPeopleQuantity());
+            cs.setString(5,c.getDateOrdered());
+            cs.setString(6,c.getDeliveryDate());
+            cs.setBoolean(7,c.isPaid());
+            cs.setString(8,c.getComment());
 
+            cs.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void createCateringFood(CateringTransactions ct){
@@ -178,7 +208,7 @@ public class DBFacade {
             cs.setString(5, staff.getLocalDate().toString());
             cs.setString(6,staff.getAddress());
             cs.setInt(7,staff.getZipCode());
-            cs.setString(8,staff.getJobTitle());
+            cs.setString(7,staff.getJobTitle());
 
             cs.execute();
         } catch (SQLException e) {

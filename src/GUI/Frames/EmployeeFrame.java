@@ -210,7 +210,11 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         empButtonSearch.setText("Search");
         empButtonSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                empButtonSearchjButton1ActionPerformed(evt);
+                try {
+                    empButtonSearchjButton1ActionPerformed(evt);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -428,8 +432,23 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_empFieldNameFocusLost
 
-    private void empButtonSearchjButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empButtonSearchjButton1ActionPerformed
+    private void empButtonSearchjButton1ActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_empButtonSearchjButton1ActionPerformed
         // TODO add your handling code here:
+        if (!empFieldEmpID.getText().equals("Employee ID")){
+            con.staffViewID(Integer.parseInt(empFieldEmpID.getText()));
+            updateTable();
+        }
+        if (!empFieldName.getText().equals("Name")){
+            con.staffViewName(empFieldName.getText());
+            updateTable();
+        }
+        if(!empFieldDate.getText().equals("yyyy-mm-dd")){
+            con.staffViewDate(empFieldDate.getText());
+            updateTable();
+        }
+        if(empFieldEmpID.getText().equals("Employee ID")&&empFieldName.getText().equals("Name")&&empFieldDate.getText().equals("yyyy-mm-dd")) {
+            updateRow();
+        }
     }//GEN-LAST:event_empButtonSearchjButton1ActionPerformed
 
     private void empFieldEmpIDDeleteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_empFieldEmpIDDeleteFocusGained
@@ -578,6 +597,28 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
 
     private void updateRow() throws SQLException {
         con.viewStaff();
+        empTable.setModel(new javax.swing.table.DefaultTableModel(con.staff,
+                new String [] {
+                        "Employee ID", "Name", "Email", "Phone No", "Address", "ZIP", "Start Date", "User Name", "User Level"
+                }
+        ) {
+            Class[] types = new Class [] {
+                    Integer.class, String.class, String.class, String.class, String.class, Integer.class, String.class, String.class, Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                    false, true, true, true, true, true, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+    }
+    private void updateTable(){
         empTable.setModel(new javax.swing.table.DefaultTableModel(con.staff,
                 new String [] {
                         "Employee ID", "Name", "Email", "Phone No", "Address", "ZIP", "Start Date", "User Name", "User Level"

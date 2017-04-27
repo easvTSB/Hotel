@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static Technical.Encrypting.encrypt;
 
@@ -17,11 +18,13 @@ import static Technical.Encrypting.encrypt;
  */
 public class Controller {
     private DBFacade db = new DBFacade();
-    //
-    public Object[][] staff;
+
+    public Object[][] staff = new Object[30][9];
     public Object[][] jobs;
     public Object[][] foodMenu;
+    public Object[][] service;
     public Object[][] bookingView;
+    public Object[][] arrangementView;
 
     /**
      * Creates a new customer with bookings.
@@ -66,6 +69,30 @@ public class Controller {
 
     }
 
+
+    public void viewBooking() throws SQLException {
+        bookingView = new Object[42][6];
+        db.stmt = db.con.createStatement();
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Booking;");
+        int i = 0;
+        while (rs.next()) {
+            long booking_ID = rs.getLong(1);
+            long customer_ID = rs.getLong(2);
+            int staffID = rs.getInt(3);
+            Date bookingDate = rs.getDate(4);
+            boolean paid = rs.getBoolean(5);
+            String comments = rs.getString(6);
+
+            bookingView[i][0] = booking_ID;
+            bookingView[i][1] = customer_ID;
+            bookingView[i][2] = staffID;
+            bookingView[i][3] = bookingDate;
+            bookingView[i][4] = paid;
+            bookingView[i][5] = comments;
+
+            i++;
+        }
+    }
     /**
      * -------- ARRANGEMENT METHODS ---------
      */
@@ -80,6 +107,34 @@ public class Controller {
         }
 
 
+    }
+
+    public void viewArrangement() throws SQLException {
+        arrangementView = new Object[42][8];
+        db.stmt = db.con.createStatement();
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.arrangementView;");
+        int i = 0;
+        while (rs.next()) {
+            long arrangementID = rs.getLong(1);
+            String customerName = rs.getString(2);
+            String staffName = rs.getString(3);
+            Date arrangementDate = rs.getDate(4);
+            Date eventDate = rs.getDate(5);
+            String roomNo = rs.getString(6);
+            double price = rs.getDouble(7);
+            boolean paid = rs.getBoolean(8);
+
+            arrangementView[i][0] = arrangementID;
+            arrangementView[i][1] = customerName;
+            arrangementView[i][2] = staffName;
+            arrangementView[i][3] = arrangementDate;
+            arrangementView[i][4] = eventDate;
+            arrangementView[i][5] = roomNo;
+            arrangementView[i][6] = price;
+            arrangementView[i][7] = paid;
+
+            i++;
+        }
     }
 
     /**
@@ -170,6 +225,10 @@ public class Controller {
         }
     }
 
+    public void accountCreate(String userName, String password, String userLevel) {
+        db.accountCreate(new Account(userName, password, userLevel));
+    }
+
     /**
      * -------- STAFF METHODS ---------
      */
@@ -181,12 +240,23 @@ public class Controller {
 
     }
 
-    public void accountCreate(String userName, String password, String userLevel) {
-        db.accountCreate(new Account(userName, password, userLevel));
-    }
-
     public void staffDelete(int staff_ID){
         db.staffDelete(staff_ID);
+    }
+
+    public void staffViewID(int staff_ID) {
+        staff = new Object[30][9];
+        this.staff = db.staffViewID(staff_ID,staff);
+    }
+
+    public void staffViewName(String name) {
+        staff = new Object[30][9];
+        this.staff = db.staffViewName(name,staff);
+    }
+
+    public void staffViewDate(String date) {
+        staff = new Object[30][9];
+        this.staff = db.staffViewDate(date,staff);
     }
 
     public void viewStaff() throws SQLException {
@@ -220,8 +290,6 @@ public class Controller {
     }
 
 
-
-
     /**
      * -------- FOOD MENU METHODS ---------
      */
@@ -236,34 +304,35 @@ public class Controller {
             String foodDescription = rs.getString(2);
             Double foodPrice = rs.getDouble(3);
 
-            foodMenu[i][0] = null;
-            foodMenu[i][1] = foodName;
-            foodMenu[i][2] = foodDescription;
-            foodMenu[i][3] = foodPrice;
+            foodMenu[i][0] = foodName;
+            foodMenu[i][1] = foodDescription;
+            foodMenu[i][2] = foodPrice;
 
             i++;
         }
     }
 
-    public void viewBooking() throws SQLException {
-        bookingView = new Object[42][6];
+    public void foodCreate(String name, String desc, double price) {
+        db.foodCreate(name, desc, price);
+    }
+
+    public void foodDelete(String foodName){
+        db.foodDelete(foodName);
+    }
+
+    public void viewService() throws SQLException {
+        service = new Object[38][4];
         db.stmt = db.con.createStatement();
-        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Booking;");
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.HotelService;");
         int i = 0;
         while (rs.next()) {
-            long booking_ID = rs.getLong(1);
-            long customer_ID = rs.getLong(2);
-            int staffID = rs.getInt(3);
-            Date bookingDate = rs.getDate(4);
-            boolean paid = rs.getBoolean(5);
-            String comments = rs.getString(6);
+            String foodName = rs.getString(1);
+            String foodDescription = rs.getString(2);
+            Double foodPrice = rs.getDouble(3);
 
-            bookingView[i][0] = booking_ID;
-            bookingView[i][1] = customer_ID;
-            bookingView[i][2] = staffID;
-            bookingView[i][3] = bookingDate;
-            bookingView[i][4] = paid;
-            bookingView[i][5] = comments;
+            service[i][0] = foodName;
+            service[i][1] = foodDescription;
+            service[i][2] = foodPrice;
 
             i++;
         }

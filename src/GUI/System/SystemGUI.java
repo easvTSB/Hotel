@@ -249,7 +249,7 @@ public class SystemGUI extends javax.swing.JFrame {
 
     private void jMenuManageMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuManageMenuActionPerformed
         // TODO add your handling code here:
-        MenuFrame mf = new MenuFrame();
+        MenuFrame mf = new MenuFrame(control);
         desktop.add(mf);
         mf.setVisible(true);
     }//GEN-LAST:event_jMenuManageMenuActionPerformed
@@ -263,7 +263,7 @@ public class SystemGUI extends javax.swing.JFrame {
 
     private void jMenuServiceOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuServiceOpenActionPerformed
         // TODO add your handling code here:
-        ServiceFrame s = new ServiceFrame();
+        ServiceFrame s = new ServiceFrame(control);
         desktop.add(s);
         s.setVisible(true);
     }//GEN-LAST:event_jMenuServiceOpenActionPerformed

@@ -206,7 +206,9 @@ public class JobsFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         con.jobCreate(jobFieldName.getText(),jobTAreaDesc.getText());
         updateTable();
-    }                                                                                                                // Variables declaration - do not modify//GEN-LAST:event_jobButtonCreatejActionPerformed
+        jobFieldName.setText("Name");
+        jobTAreaDesc.setText("");
+    }
 
     private void jobFieldNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jobFieldNameFocusGained
         // TODO add your handling code here:
@@ -226,6 +228,7 @@ public class JobsFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         con.jobDelete(jobFieldDelete.getText());
         updateTable();
+        jobFieldDelete.setText("Job Title");
     }//GEN-LAST:event_jobButtonDeleteActionPerformed
 
     public void updateTable() throws SQLException {

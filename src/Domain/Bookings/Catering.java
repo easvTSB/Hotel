@@ -16,6 +16,7 @@ public class Catering {
     private String dateOrdered;
     private String deliveryDate;
     private boolean paid;
+    private String comment;
 
     /**
      * Constructor for creating a catering order.
@@ -99,5 +100,9 @@ public class Catering {
 
     public boolean isPaid() {
         return paid;
+    }
+
+    public String getComment() {
+        return comment;
     }
 }

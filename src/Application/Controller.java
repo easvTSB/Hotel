@@ -132,6 +132,10 @@ public class Controller {
         }
     }
 
+    public void createJob(String name, String desc){
+        db.jobCreate(new Job(name,desc));
+    }
+
     /** -------- STAFF METHODS --------- */
 
     public void staffCreate(String fName, String lName, String phoneNo, String email,

@@ -5,16 +5,20 @@
  */
 package GUI.Frames;
 
+import Application.Controller;
+
 /**
  *
  * @author LPNielsen
  */
 public class JobsFrame extends javax.swing.JInternalFrame {
+    Controller con;
 
     /**
      * Creates new form Jobs
      */
-    public JobsFrame() {
+    public JobsFrame(Controller con) {
+        this.con = con;
         initComponents();
     }
 
@@ -231,6 +235,7 @@ public class JobsFrame extends javax.swing.JInternalFrame {
 
     private void jobButtonCreatejActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobButtonCreatejActionPerformed
         // TODO add your handling code here:
+        con.createJob(jobFieldName.getText(),jobTAreaDesc.getText());
     }                                                                                                                // Variables declaration - do not modify//GEN-LAST:event_jobButtonCreatejActionPerformed
 
     private void jobFieldNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jobFieldNameFocusGained

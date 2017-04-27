@@ -3,6 +3,7 @@ package Technical;
 import Domain.Account;
 import Domain.Bookings.*;
 import Domain.Customer;
+import Domain.Job;
 import Domain.Staff;
 
 import java.sql.*;
@@ -224,6 +225,18 @@ public class DBFacade {
             cs.setString(6,staff.getAddress());
             cs.setInt(7,staff.getZipCode());
             cs.setString(8,staff.getJobTitle());
+
+            cs.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void jobCreate(Job job){
+        try {
+            cs = con.prepareCall("{call CreateJob(?,?)}");
+            cs.setString(1,job.getName());
+            cs.setString(2,job.getDesc());
 
             cs.execute();
         } catch (SQLException e) {

@@ -592,6 +592,8 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         String empTitle = empCBOXTitle.getSelectedItem().toString();
         String empLevel = empCBoxLevel.getSelectedItem().toString();
 
+        con = new Controller();
+
         con.staffCreate(empFName,empLName,empPhoneno,empEmail,empAddress,empZIP,empTitle);
         con.accountCreate(empFName,empLName,empLevel);
     }//GEN-LAST:event_empButtonCreateActionPerformed

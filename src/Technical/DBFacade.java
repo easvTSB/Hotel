@@ -9,7 +9,7 @@ import java.sql.*;
 
 public class DBFacade {
     private String userName = "sa";
-    private String password = "132456";
+    private String password = "123456";
     private String port = "1433";
     private String databaseName = "Hotel";
     public Connection con;
@@ -178,7 +178,7 @@ public class DBFacade {
             cs.setString(5, staff.getLocalDate().toString());
             cs.setString(6,staff.getAddress());
             cs.setInt(7,staff.getZipCode());
-            cs.setString(7,staff.getJobTitle());
+            cs.setString(8,staff.getJobTitle());
 
             cs.execute();
         } catch (SQLException e) {

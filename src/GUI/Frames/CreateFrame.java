@@ -273,7 +273,7 @@ public class CreateFrame extends javax.swing.JInternalFrame {
 
         creCPanelEvent.add(crePanelArr, "card2");
 
-        creCBoxBook.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Standard", "Honeymoon", "Ocean View" }));
+        creCBoxBook.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single", "Double", "Twin","Honeymoon Suite" }));
 
         creFieldBookDateFrom.setText("yyyy-mm-dd");
         creFieldBookDateFrom.addFocusListener(new java.awt.event.FocusAdapter() {

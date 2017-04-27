@@ -1,14 +1,13 @@
 package Technical;
 
-import Domain.Bookings.Booking;
-import Domain.Bookings.BookingTransactions;
+import Domain.Bookings.*;
 import Domain.Customer;
 
 import java.sql.*;
 
 public class DBFacade {
     private String userName = "sa";
-    private String password = "8520";
+    private String password = "seba0830";
     private String port = "1433";
     private String databaseName = "Hotel";
     public Connection con;
@@ -109,6 +108,62 @@ public class DBFacade {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void createArrangement(Arrangement ar, long customerID ){
+        try {
+            cs = con.prepareCall("{call CreateArrangement(?,?,?,?,?,?)}");
+            cs.setString(1,ar.getEventType());
+            cs.setLong(2,customerID);
+            cs.setInt(3,ar.getStaffID());
+            cs.setString(4,ar.getDayOrderPlaced());
+            cs.setBoolean(5,ar.isPaid());
+            cs.setString(6,ar.getComment());
+
+            cs.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void createArrangementCus (Arrangement ar) {
+        try {
+            cs = con.prepareCall("{call insert_ArrangeCus(?,?,?,?,?)}");
+            cs.setString(1,ar.getEventType());
+            cs.setInt(2,ar.getStaffID());
+            cs.setString(3,ar.getDayOrderPlaced());
+            cs.setBoolean(4,ar.isPaid());
+            cs.setString(5,ar.getComment());
+
+            cs.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createArrangementTransactionCus(ArrangementTransactions arrT) {
+        try {
+            cs = con.prepareCall("{call InsertArrangementTransaction(?,?,?,?,?)}");
+            cs.setString(1, arrT.getRoomNo());
+            cs.setString(2, arrT.getEventDate());
+
+            cs.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void createCatering(Catering c, long customerID){
+
+    }
+
+    public void createCateringCus(Catering c){
+
+    }
+
+    public void createCateringFood(CateringTransactions ct){
+
     }
 
 

@@ -7,7 +7,19 @@ public class ArrangementTransactions {
     private boolean paid;
 
     /**
-     * Constructor for a general bookingtransaction. A representation of the database table.
+     * Constructor for a new Arrangement Transaction
+     * @param roomNo
+     * @param eventDate
+     * @param paid
+     */
+    public ArrangementTransactions(String roomNo, String eventDate, boolean paid) {
+        this.roomNo = roomNo;
+        this.eventDate = eventDate;
+        this.paid = paid;
+    }
+
+    /**
+     * Constructor for a already existing transaction.
      * @param arrangementID
      * @param roomNo
      * @param eventDate

@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
 public class Arrangement {
     private int arrangementID;
     private String eventType;
-    private String customerID;
-    private String staffID;
+    private long customerID;
+    private int staffID;
     private String dayOrderPlaced;
     private boolean isPaid;
     private String comment;
@@ -19,14 +19,12 @@ public class Arrangement {
     /**
      * Constructor used for creating a new Arrangement
      * @param eventType
-     * @param customerID
      * @param staffID
      * @param isPaid
      * @param comment
      */
-    public Arrangement(String eventType, String customerID, String staffID, boolean isPaid, String comment) {
+    public Arrangement(String eventType, int staffID, boolean isPaid, String comment) {
         this.eventType = eventType;
-        this.customerID = customerID;
         this.staffID = staffID;
         LocalDate localDate = LocalDate.now();
         this.dayOrderPlaced = DateTimeFormatter.ofPattern("yyy-MM-dd").format(localDate);
@@ -44,7 +42,7 @@ public class Arrangement {
      * @param isPaid
      * @param comment
      */
-    public Arrangement(int arrangementID, String eventType, String customerID, String staffID, String dayOrderPlaced,
+    public Arrangement(int arrangementID, String eventType, long customerID, int staffID, String dayOrderPlaced,
                        boolean isPaid, String comment) {
         this.arrangementID = arrangementID;
         this.eventType = eventType;
@@ -63,11 +61,11 @@ public class Arrangement {
         return eventType;
     }
 
-    public String getCustomerID() {
+    public long getCustomerID() {
         return customerID;
     }
 
-    public String getStaffID() {
+    public int getStaffID() {
         return staffID;
     }
 

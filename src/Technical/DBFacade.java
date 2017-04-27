@@ -214,35 +214,6 @@ public class DBFacade {
 
     }
 
-    public void staffCreate(Staff staff){
-        try {
-            cs = con.prepareCall("{call CreateStaffMember(?,?,?,?,?,?,?,?)}");
-            cs.setString(1,staff.getfName());
-            cs.setString(2,staff.getlName());
-            cs.setString(3,staff.getPhoneNo());
-            cs.setString(4,staff.getEmail());
-            cs.setString(5, staff.getLocalDate().toString());
-            cs.setString(6,staff.getAddress());
-            cs.setInt(7,staff.getZipCode());
-            cs.setString(8,staff.getJobTitle());
-
-            cs.execute();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void staffDelete(int staff_id) {
-        try {
-            cs = con.prepareCall("{call DeleteStaffMember(?)}");
-            cs.setInt(1, staff_id);
-
-            cs.execute();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     public void jobCreate(Job job){
         try {
             cs = con.prepareCall("{call CreateJob(?,?)}");
@@ -304,10 +275,109 @@ public class DBFacade {
         }
     }
 
+    public void staffCreate(Staff staff){
+        try {
+            cs = con.prepareCall("{call CreateStaffMember(?,?,?,?,?,?,?,?)}");
+            cs.setString(1,staff.getfName());
+            cs.setString(2,staff.getlName());
+            cs.setString(3,staff.getPhoneNo());
+            cs.setString(4,staff.getEmail());
+            cs.setString(5, staff.getLocalDate().toString());
+            cs.setString(6,staff.getAddress());
+            cs.setInt(7,staff.getZipCode());
+            cs.setString(8,staff.getJobTitle());
+
+            cs.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void staffDelete(int staff_id) {
+        try {
+            cs = con.prepareCall("{call DeleteStaffMember(?)}");
+            cs.setInt(1, staff_id);
+
+            cs.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public Object[][] staffViewID(int staff_id, Object[][] staff) {
         try {
             cs = con.prepareCall("{call ViewStaffID(?)}");
             cs.setInt(1,staff_id);
+            ResultSet rs = cs.executeQuery();
+            int i = 0;
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String firstName = rs.getString(2);
+                String email = rs.getString(3);
+                String phoneNo = rs.getString(4);
+                String address = rs.getString(5);
+                int cityZip = rs.getInt(6);
+                Date startDate = rs.getDate(7);
+                String userName = rs.getString(8);
+                String occupation = rs.getString(9);
+
+                staff[i][0] = id;
+                staff[i][1] = firstName;
+                staff[i][2] = email;
+                staff[i][3] = phoneNo;
+                staff[i][4] = address;
+                staff[i][5] = cityZip;
+                staff[i][6] = startDate;
+                staff[i][7] = userName;
+                staff[i][8] = occupation;
+
+                i++;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return staff;
+    }
+
+    public Object[][] staffViewName(String name, Object[][] staff) {
+        try {
+            cs = con.prepareCall("{call ViewStaffName(?)}");
+            cs.setString(1,name);
+            ResultSet rs = cs.executeQuery();
+            int i = 0;
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String firstName = rs.getString(2);
+                String email = rs.getString(3);
+                String phoneNo = rs.getString(4);
+                String address = rs.getString(5);
+                int cityZip = rs.getInt(6);
+                Date startDate = rs.getDate(7);
+                String userName = rs.getString(8);
+                String occupation = rs.getString(9);
+
+                staff[i][0] = id;
+                staff[i][1] = firstName;
+                staff[i][2] = email;
+                staff[i][3] = phoneNo;
+                staff[i][4] = address;
+                staff[i][5] = cityZip;
+                staff[i][6] = startDate;
+                staff[i][7] = userName;
+                staff[i][8] = occupation;
+
+                i++;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return staff;
+    }
+
+    public Object[][] staffViewDate(String date, Object[][] staff) {
+        try {
+            cs = con.prepareCall("{call ViewStaffDate(?)}");
+            cs.setString(1,date);
             ResultSet rs = cs.executeQuery();
             int i = 0;
             while (rs.next()) {

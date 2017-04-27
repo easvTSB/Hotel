@@ -19,7 +19,7 @@ import static Technical.Encrypting.encrypt;
 public class Controller {
     private DBFacade db = new DBFacade();
 
-    public Object[][] staff;
+    public Object[][] staff = new Object[30][9];
     public Object[][] jobs;
     public Object[][] foodMenu;
     public Object[][] bookingView;
@@ -248,6 +248,16 @@ public class Controller {
         this.staff = db.staffViewID(staff_ID,staff);
     }
 
+    public void staffViewName(String name) {
+        staff = new Object[30][9];
+        this.staff = db.staffViewName(name,staff);
+    }
+
+    public void staffViewDate(String date) {
+        staff = new Object[30][9];
+        this.staff = db.staffViewDate(date,staff);
+    }
+
     public void viewStaff() throws SQLException {
         staff = new Object[30][9];
         db.stmt = db.con.createStatement();
@@ -308,4 +318,5 @@ public class Controller {
     public void foodDelete(String foodName){
         db.foodDelete(foodName);
     }
+
 }

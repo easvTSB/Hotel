@@ -434,9 +434,20 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
 
     private void empButtonSearchjButton1ActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_empButtonSearchjButton1ActionPerformed
         // TODO add your handling code here:
-        if (!empFieldEmpID.equals("Employee ID")){
+        if (!empFieldEmpID.getText().equals("Employee ID")){
             con.staffViewID(Integer.parseInt(empFieldEmpID.getText()));
             updateTable();
+        }
+        if (!empFieldName.getText().equals("Name")){
+            con.staffViewName(empFieldName.getText());
+            updateTable();
+        }
+        if(!empFieldDate.getText().equals("yyyy-mm-dd")){
+            con.staffViewDate(empFieldDate.getText());
+            updateTable();
+        }
+        if(empFieldEmpID.getText().equals("Employee ID")&&empFieldName.getText().equals("Name")&&empFieldDate.getText().equals("yyyy-mm-dd")) {
+            updateRow();
         }
     }//GEN-LAST:event_empButtonSearchjButton1ActionPerformed
 

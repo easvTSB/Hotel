@@ -1,9 +1,5 @@
 package Domain;
 
-import Technical.DBFacade;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.time.LocalDate;
 
 /**
@@ -18,6 +14,7 @@ public class Staff {
     private String address;
     private int zipCode;
     private String jobTitle;
+    private LocalDate localDate = LocalDate.now();
 
     public Staff(String fName, String lName, String phoneNo, String email,
                  String address, int zipCode, String jobTitle) {
@@ -44,6 +41,14 @@ public class Staff {
 
     public int getID() {
         return ID;
+    }
+
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
     }
 
     public void setID(int ID) {

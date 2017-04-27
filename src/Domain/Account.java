@@ -11,19 +11,19 @@ import java.util.Random;
 public class Account {
     private String symbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy";
     private Random rand = new Random();
+    private String fName;
+    private String lName;
     private String userName;
     private String passWord;
     private String userLevel;
 
-    public Account(String username, String password){
-        userName = username;
-        passWord = password;
-    }
-
-    public Account(String userName, String password, String userLevel) {
-        this.userName = userName;
-        this.passWord = password;
+    public Account(String FName, String LName, String userLevel){
+        this.fName = FName;
+        this.lName = LName;
         this.userLevel = userLevel;
+
+        generateUsername(lName,fName);
+        generatePassword();
     }
 
     public String getUserName() {
@@ -36,14 +36,6 @@ public class Account {
 
     public String getUserLevel() {
         return userLevel;
-    }
-
-    public void setPassword(){
-        generatePassword();
-    }
-
-    public void setUserName(String fName, String lName){
-        generateUsername(fName,lName);
     }
 
     private void generateUsername(String fName, String lName){
@@ -66,7 +58,6 @@ public class Account {
         for (int i = 1; i<=6;i++){
             password += symbols.charAt(rand.nextInt(symbols.length()));
         }
-        password = Encrypting.encrypt(password);
         passWord = password;
     }
 }

@@ -83,4 +83,14 @@ public class Controller {
 
     }
 
+    public void staffCreate(String fName, String lName, String phoneNo, String email,
+                            String address, int zipCode, String jobTitle) {
+
+        db.staffCreate(new Staff(fName, lName, phoneNo, email, address, zipCode, jobTitle));
+
+    }
+
+    public void accountCreate(String userName, String password, String userLevel){
+        db.accountCreate(new Account(userName, password, userLevel));
+    }
 }

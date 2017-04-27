@@ -5,8 +5,7 @@
  */
 package GUI.Frames;
 
-import Domain.Staff;
-import Technical.StaffDB;
+import Application.Controller;
 
 import java.sql.SQLException;
 
@@ -15,7 +14,7 @@ import java.sql.SQLException;
  * @author LPNielsen
  */
 public class EmployeeFrame extends javax.swing.JInternalFrame {
-    StaffDB staffDB = new StaffDB();
+    private Controller con;
     /**
      * Creates new form Frame1
      */
@@ -589,12 +588,12 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         String empPhoneno = empFieldCreatePhoneNo.getText();
         String empEmail = empFieldCreateEmail.getText();
         String empAddress = empFieldCreateAddress.getText();
-        String empZIP = empFieldCreateZIP.getText();
+        int empZIP = Integer.parseInt(empFieldCreateZIP.getText());
         String empTitle = empCBOXTitle.getSelectedItem().toString();
+        String empLevel = empCBoxLevel.getSelectedItem().toString();
 
-        staffDB.createStaffMember(empFName,empLName,empPhoneno,empEmail,empAddress,Integer.parseInt(empZIP),empTitle);
-        staffDB.createStaffAccount(empFieldCreateFName,empFieldCreateLName,empCBOXTitle);
-        staffDB.generateAccount();
+        con.staffCreate(empFName,empLName,empPhoneno,empEmail,empAddress,empZIP,empTitle);
+        con.accountCreate(empFName,empLName,empLevel);
     }//GEN-LAST:event_empButtonCreateActionPerformed
 
 

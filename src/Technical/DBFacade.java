@@ -1,7 +1,9 @@
 package Technical;
 
+import Domain.Account;
 import Domain.Bookings.*;
 import Domain.Customer;
+import Domain.Staff;
 
 import java.sql.*;
 
@@ -166,5 +168,47 @@ public class DBFacade {
 
     }
 
+    public void staffCreate(Staff staff){
+        try {
+            cs = con.prepareCall("{call CreateStaffMember(?,?,?,?,?,?,?,?)}");
+            cs.setString(1,staff.getfName());
+            cs.setString(2,staff.getlName());
+            cs.setString(3,staff.getPhoneNo());
+            cs.setString(4,staff.getEmail());
+            cs.setString(5, staff.getLocalDate().toString());
+            cs.setString(6,staff.getAddress());
+            cs.setInt(7,staff.getZipCode());
+            cs.setString(7,staff.getJobTitle());
 
+            cs.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void accountCreate(Account acc){
+        try {
+            cs = con.prepareCall("{call CreateStaffMember(?,?,?,?,?,?,?,?)}");
+            cs.setString(1,staff.getfName());
+            cs.setString(2,staff.getlName());
+            cs.setString(3,staff.getPhoneNo());
+            cs.setString(4,staff.getEmail());
+            cs.setString(5, staff.getLocalDate().toString());
+            cs.setString(6,staff.getAddress());
+            cs.setInt(7,staff.getZipCode());
+            cs.setString(7,staff.getJobTitle());
+
+            cs.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+//
+//    public void staffEdit(Staff staff){
+//
+//    }
+//
+//    public void staffDelete(Staff staff){
+//
+//    }
 }

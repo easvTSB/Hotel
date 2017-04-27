@@ -5,16 +5,26 @@
  */
 package GUI.Frames;
 
+import Application.Controller;
+import Domain.Food;
+
+import java.sql.SQLException;
+
 /**
  *
  * @author LPNielsen
  */
 public class MenuFrame extends javax.swing.JInternalFrame {
-
+    private Controller controller = new Controller();
     /**
      * Creates new form RestaurantFrame
      */
     public MenuFrame() {
+        try{
+        controller.viewNames();
+    } catch (SQLException e){
+
+    }
         initComponents();
     }
 
@@ -49,45 +59,45 @@ public class MenuFrame extends javax.swing.JInternalFrame {
 
         menuTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                    {null, controller.foodNames.get(0), controller.foodDescriptions.get(0), controller.foodPrices.get(0)},
+                    {null, controller.foodNames.get(1), controller.foodDescriptions.get(1), controller.foodPrices.get(1)},
+                    {null, controller.foodNames.get(2), controller.foodDescriptions.get(2), controller.foodPrices.get(2)},
+                    {null, controller.foodNames.get(3), controller.foodDescriptions.get(3), controller.foodPrices.get(3)},
+                    {null, controller.foodNames.get(4), controller.foodDescriptions.get(4), controller.foodPrices.get(4)},
+                    {null, controller.foodNames.get(5), controller.foodDescriptions.get(5), controller.foodPrices.get(5)},
+                    {null, controller.foodNames.get(6), controller.foodDescriptions.get(6), controller.foodPrices.get(6)},
+                    {null, controller.foodNames.get(7), controller.foodDescriptions.get(7), controller.foodPrices.get(7)},
+                    {null, controller.foodNames.get(8), controller.foodDescriptions.get(8), controller.foodPrices.get(8)},
+                    {null, controller.foodNames.get(9), controller.foodDescriptions.get(9), controller.foodPrices.get(9)},
+                    {null, controller.foodNames.get(10), controller.foodDescriptions.get(10), controller.foodPrices.get(10)},
+                    {null, controller.foodNames.get(11), controller.foodDescriptions.get(11), controller.foodPrices.get(11)},
+                    {null, controller.foodNames.get(12), controller.foodDescriptions.get(12), controller.foodPrices.get(12)},
+                    {null, controller.foodNames.get(13), controller.foodDescriptions.get(13), controller.foodPrices.get(13)},
+                    {null, controller.foodNames.get(14), controller.foodDescriptions.get(15), controller.foodPrices.get(14)},
+                    {null, controller.foodNames.get(15), controller.foodDescriptions.get(16), controller.foodPrices.get(15)},
+                    {null, controller.foodNames.get(16), controller.foodDescriptions.get(17), controller.foodPrices.get(16)},
+                    {null, controller.foodNames.get(17), controller.foodDescriptions.get(18), controller.foodPrices.get(17)},
+                    {null, controller.foodNames.get(18), controller.foodDescriptions.get(19), controller.foodPrices.get(18)},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null},
+                    {null, controller.foodNames.get(18), null, null}
             },
             new String [] {
                 "Food ID", "Name", "Description", "Price"
@@ -127,7 +137,7 @@ public class MenuFrame extends javax.swing.JInternalFrame {
 
         jLabel27.setText("Price:");
 
-        menuFieldPrice.setText("Price");
+        menuFieldPrice.setText("0.99");
         menuFieldPrice.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 menuFieldPriceFocusGained(evt);
@@ -315,11 +325,24 @@ public class MenuFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_menuFieldPriceFocusLost
 
     private void menuButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonDeleteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuButtonDeleteActionPerformed
+        double price = Double.parseDouble(menuFieldPrice.getText().toString());
+        try {
+            Food food = new Food(menuFieldName.getText().toString(), menuTAreaDesc.getText().toString(), price);
+            food.deleteFood(menuFieldFoodIDDelete.getText().toString());
+        }catch (SQLException e ){
+
+        }//GEN-LAST:event_menuButtonDeleteActionPerformed
+    }
 
     private void menuButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonCreateActionPerformed
         // TODO add your handling code here:
+        double price = Double.parseDouble(menuFieldPrice.getText().toString());
+        try {
+            Food food = new Food(menuFieldName.getText().toString(), menuTAreaDesc.getText().toString(), price);
+            food.createFood();
+        } catch (SQLException e) {
+
+        }
     }//GEN-LAST:event_menuButtonCreateActionPerformed
 
 

@@ -1158,7 +1158,16 @@ public class CreateFrame extends javax.swing.JInternalFrame {
             String deliveryAddress = creFieldCatAddress.getText();
             int zipDelivery = Integer.parseInt(creFieldCatZIP.getText());
             String deliveryDate = creFieldCatDate.getText();
+            String deliveryTime = creJBoxCatTime.getSelectedItem().toString();
             String comment = creTAreaCatComment.getText();
+
+            // Hardcoded test data to see if it works
+            ArrayList<String> foodItems = new ArrayList<>();
+            ArrayList<Integer> quantity = new ArrayList<>();
+            foodItems.add("Coca-cola");
+            foodItems.add("Cheese Burger");
+            quantity.add(4);
+            quantity.add(4);
 
         if(creFieldCusID.getText().equalsIgnoreCase("customer id")){
             String fName = creFieldFName.getText();
@@ -1168,9 +1177,11 @@ public class CreateFrame extends javax.swing.JInternalFrame {
             String address = creFieldAddress.getText();
             int zip = Integer.parseInt(creFieldZIP.getText());
 
-            con.createCusCatering(fName,lName,mail,phoneNo,address,zip,deliveryAddress,zipDelivery,amountOfPeople,deliveryDate,comment);
+            con.createCusCatering(fName,lName,mail,phoneNo,address,zip,deliveryAddress,zipDelivery,amountOfPeople,deliveryTime,deliveryDate,comment,foodItems,quantity);
         }else{
+            int customerID = Integer.parseInt(creFieldCusID.getText());
 
+            con.createCatering(customerID,deliveryAddress,zipDelivery,amountOfPeople,deliveryTime,deliveryDate,comment,foodItems,quantity);
         }
 
 

@@ -159,16 +159,17 @@ public class DBFacade {
 
     public void createCatering(Catering c, long customerID){
         try {
-            cs = con.prepareCall("{call insert_catering(?,?,?,?,?,?,?,?,?)}");
+            cs = con.prepareCall("{call insert_catering(?,?,?,?,?,?,?,?,?,?)}");
             cs.setLong(1,customerID);
             cs.setInt(2,c.getStaffID());
             cs.setString(3,c.getDeliveryAddress());
             cs.setInt(4,c.getZip());
             cs.setInt(5,c.getPeopleQuantity());
             cs.setString(6,c.getDateOrdered());
-            cs.setString(7,c.getDeliveryDate());
-            cs.setBoolean(8,c.isPaid());
-            cs.setString(9,c.getComment());
+            cs.setString(7,c.getDeliveryTime());
+            cs.setString(8,c.getDeliveryDate());
+            cs.setBoolean(9,c.isPaid());
+            cs.setString(10,c.getComment());
 
             cs.execute();
 
@@ -179,15 +180,16 @@ public class DBFacade {
 
     public void createCateringCus(Catering c){
         try {
-            cs = con.prepareCall("{call insert_cateringCus(?,?,?,?,?,?,?,?)}");
+            cs = con.prepareCall("{call insert_cateringCus(?,?,?,?,?,?,?,?,?)}");
             cs.setInt(1,c.getStaffID());
             cs.setString(2,c.getDeliveryAddress());
             cs.setInt(3,c.getZip());
             cs.setInt(4,c.getPeopleQuantity());
             cs.setString(5,c.getDateOrdered());
-            cs.setString(6,c.getDeliveryDate());
-            cs.setBoolean(7,c.isPaid());
-            cs.setString(8,c.getComment());
+            cs.setString(6,c.getDeliveryTime());
+            cs.setString(7,c.getDeliveryDate());
+            cs.setBoolean(8,c.isPaid());
+            cs.setString(9,c.getComment());
 
             cs.execute();
         } catch (SQLException e) {

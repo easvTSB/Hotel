@@ -14,6 +14,7 @@ public class Catering {
     private int zip;
     private int peopleQuantity;
     private String dateOrdered;
+    private String deliveryTime;
     private String deliveryDate;
     private boolean paid;
     private String comment;
@@ -27,7 +28,7 @@ public class Catering {
      * @param deliveryDate
      * @param paid
      */
-    public Catering(int staffID, String deliveryAddress, int zip, int peopleQuantity,
+    public Catering(int staffID, String deliveryAddress, int zip, int peopleQuantity,String deliveryTime,
                      String deliveryDate, boolean paid, String comment) {
         this.staffID = staffID;
         this.deliveryAddress = deliveryAddress;
@@ -35,6 +36,7 @@ public class Catering {
         this.peopleQuantity = peopleQuantity;
         LocalDate localDate = LocalDate.now();
         this.dateOrdered = DateTimeFormatter.ofPattern("yyy-MM-dd").format(localDate);
+        this.deliveryTime = deliveryTime;
         this.deliveryDate = deliveryDate;
         this.paid = paid;
         this.comment = comment;
@@ -53,7 +55,7 @@ public class Catering {
      * @param paid
      */
     public Catering(int cateringOrderID, int customerID, int staffID, String deliveryAddress, int zip, int peopleQuantity,
-                    String dateOrdered, String deliveryDate, boolean paid, String comment) {
+                    String dateOrdered,String deliveryTime, String deliveryDate, boolean paid, String comment) {
         this.cateringOrderID = cateringOrderID;
         this.customerID = customerID;
         this.staffID = staffID;
@@ -61,6 +63,7 @@ public class Catering {
         this.zip = zip;
         this.peopleQuantity = peopleQuantity;
         this.dateOrdered = dateOrdered;
+        this.deliveryTime = deliveryTime;
         this.deliveryDate = deliveryDate;
         this.paid = paid;
         this.comment = comment;
@@ -92,6 +95,10 @@ public class Catering {
 
     public String getDateOrdered() {
         return dateOrdered;
+    }
+
+    public String getDeliveryTime() {
+        return deliveryTime;
     }
 
     public String getDeliveryDate() {

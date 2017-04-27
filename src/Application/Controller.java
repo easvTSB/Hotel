@@ -53,8 +53,9 @@ public class Controller {
      * @param roomsBooked
      */
     public void createBooking(long customerID, String checkIn, String checkOut,String comment, ArrayList<String> roomsBooked)  {
-
+        // Creates an booking with customer
         db.createBooking(new Booking(1,false,comment),customerID);
+        // For loop creating corresponding booking transactions.
         for(int i = 0 ; i < roomsBooked.size(); i++){
             db.createBookingTransactionCus(new BookingTransactions(roomsBooked.get(i),checkIn,checkOut));
         }
@@ -75,8 +76,18 @@ public class Controller {
 
     }
 
+    /**
+     * Creates an arrangement and corresponding transactions, with an already existing customer.
+     * @param customerID
+     * @param eventType
+     * @param eventDate
+     * @param comment
+     * @param roomsBooked
+     */
     public void createArrangement(long customerID,String eventType,String eventDate, String comment, ArrayList<String> roomsBooked){
+        // creates an arrangement with already existing customer
         db.createArrangement(new Arrangement(eventType,1,false,comment), customerID);
+        // For loop creating the arrangement transactions.
         for(int i = 0 ; i < roomsBooked.size(); i++){
             db.createArrangementTransactionCus(new ArrangementTransactions(roomsBooked.get(i),eventDate));
         }
@@ -85,13 +96,13 @@ public class Controller {
     /** -------- CATERING METHODS --------- */
 
     public void createCusCatering(String firstName, String lastName, String mail, String phone, String address, int zip,
-                                  String deliveryAddress, int zipDeliv, int peopleQuantity,String deliveryDate,String comment,
+                                  String deliveryAddress, int zipDeliv, int peopleQuantity,String deliveryTime,String deliveryDate,String comment,
                                   ArrayList<String> foodItems, ArrayList<Integer> foodAmount){
 
         // Creates a customer.
         db.createCustomer(new Customer(firstName,lastName,mail,phone,address,zip));
         // Creates a catering order with the customer.
-        db.createCateringCus(new Catering(1,deliveryAddress,zipDeliv,peopleQuantity,deliveryDate,false,comment));
+        db.createCateringCus(new Catering(1,deliveryAddress,zipDeliv,peopleQuantity,deliveryTime,deliveryDate,false,comment));
         // For loop that adds all the items related to the catering order.
         for(int i = 0 ; i < foodItems.size() ; i++){
             db.createCateringFood(new CateringTransactions(foodItems.get(i),foodAmount.get(i)));
@@ -111,10 +122,10 @@ public class Controller {
      * @param foodAmount
      */
     public void createCatering(long customerID,String deliveryAddress, int zipDeliv, int peopleQuantity,String deliveryDate,
-                               String comment, ArrayList<String> foodItems, ArrayList<Integer> foodAmount){
+                               String deliveryTime,String comment, ArrayList<String> foodItems, ArrayList<Integer> foodAmount){
 
         // Creates a catering order with already existing customer.
-        db.createCatering(new Catering(1,deliveryAddress,zipDeliv,peopleQuantity,deliveryDate,false,comment), customerID);
+        db.createCatering(new Catering(1,deliveryAddress,zipDeliv,peopleQuantity,deliveryTime,deliveryDate,false,comment), customerID);
         // For loop that adds all the items related to the catering order.
         for(int i = 0 ; i < foodItems.size() ; i++){
             db.createCateringFood(new CateringTransactions(foodItems.get(i),foodAmount.get(i)));

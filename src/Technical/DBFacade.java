@@ -195,7 +195,15 @@ public class DBFacade {
     }
 
     public void createCateringFood(CateringTransactions ct){
+        try {
+            cs = con.prepareCall("{call InsertCatteringTransaction(?,?)}");
+            cs.setString(1,ct.getFoodName());
+            cs.setInt(2,ct.getQuantity());
 
+            cs.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void staffCreate(Staff staff){
@@ -229,6 +237,7 @@ public class DBFacade {
             System.out.println(e.getMessage());
         }
     }
+
 //
 //    public void staffEdit(Staff staff){
 //

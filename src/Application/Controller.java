@@ -22,6 +22,7 @@ public class Controller {
     public Object[][] jobs;
     public Object[][] foodMenu;
     public Object[][] bookingView;
+    public Object[][] arrangementView;
 
     /**
      * Creates a new customer with bookings.
@@ -66,6 +67,30 @@ public class Controller {
 
     }
 
+
+    public void viewBooking() throws SQLException {
+        bookingView = new Object[42][6];
+        db.stmt = db.con.createStatement();
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Booking;");
+        int i = 0;
+        while (rs.next()) {
+            long booking_ID = rs.getLong(1);
+            long customer_ID = rs.getLong(2);
+            int staffID = rs.getInt(3);
+            Date bookingDate = rs.getDate(4);
+            boolean paid = rs.getBoolean(5);
+            String comments = rs.getString(6);
+
+            bookingView[i][0] = booking_ID;
+            bookingView[i][1] = customer_ID;
+            bookingView[i][2] = staffID;
+            bookingView[i][3] = bookingDate;
+            bookingView[i][4] = paid;
+            bookingView[i][5] = comments;
+
+            i++;
+        }
+    }
     /**
      * -------- ARRANGEMENT METHODS ---------
      */
@@ -80,6 +105,34 @@ public class Controller {
         }
 
 
+    }
+
+    public void viewArrangement() throws SQLException {
+        arrangementView = new Object[42][8];
+        db.stmt = db.con.createStatement();
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.arrangementView;");
+        int i = 0;
+        while (rs.next()) {
+            long arrangementID = rs.getLong(1);
+            String customerName = rs.getString(2);
+            String staffName = rs.getString(3);
+            Date arrangementDate = rs.getDate(4);
+            Date eventDate = rs.getDate(5);
+            String roomNo = rs.getString(6);
+            double price = rs.getDouble(7);
+            boolean paid = rs.getBoolean(8);
+
+            arrangementView[i][0] = arrangementID;
+            arrangementView[i][1] = customerName;
+            arrangementView[i][2] = staffName;
+            arrangementView[i][3] = arrangementDate;
+            arrangementView[i][4] = eventDate;
+            arrangementView[i][5] = roomNo;
+            arrangementView[i][6] = price;
+            arrangementView[i][7] = paid;
+
+            i++;
+        }
     }
 
     /**
@@ -245,27 +298,5 @@ public class Controller {
         }
     }
 
-    public void viewBooking() throws SQLException {
-        bookingView = new Object[42][6];
-        db.stmt = db.con.createStatement();
-        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Booking;");
-        int i = 0;
-        while (rs.next()) {
-            long booking_ID = rs.getLong(1);
-            long customer_ID = rs.getLong(2);
-            int staffID = rs.getInt(3);
-            Date bookingDate = rs.getDate(4);
-            boolean paid = rs.getBoolean(5);
-            String comments = rs.getString(6);
 
-            bookingView[i][0] = booking_ID;
-            bookingView[i][1] = customer_ID;
-            bookingView[i][2] = staffID;
-            bookingView[i][3] = bookingDate;
-            bookingView[i][4] = paid;
-            bookingView[i][5] = comments;
-
-            i++;
-        }
-    }
 }

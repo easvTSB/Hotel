@@ -282,6 +282,7 @@ public class MenuFrame extends javax.swing.JInternalFrame {
     private void menuButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonDeleteActionPerformed
         con.foodDelete(menuFieldFoodIDDelete.getText());
         updateTable();
+        menuFieldFoodIDDelete.setText("");
     }
 
     private void menuButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonCreateActionPerformed

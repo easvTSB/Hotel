@@ -6,7 +6,11 @@
 package GUI.Frames;
 
 import Application.Controller;
+import Technical.DBFacade;
 
+import java.sql.CallableStatement;
+import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -23,6 +27,7 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         con.viewStaff();
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,51 +76,7 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(1200, 779));
 
         empTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, con.staffFirstName.get(0), null, null, null, null, null, null, null},
-                {null, con.staffFirstName.get(1), null, null, null, null, null, null, null},
-                {null, con.staffFirstName.get(2), null, null, null, null, null, null, null},
-                {null, con.staffFirstName.get(3), null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
-            },
+                con.staff,
             new String [] {
                 "Employee ID", "Name", "Email", "Phone No", "Address", "ZIP", "Start Date", "User Name", "User Level"
             }

@@ -23,8 +23,9 @@ public class CreateFrame extends javax.swing.JInternalFrame {
      * Creates new form CreateFrame
      */
     public CreateFrame(Controller controller) {
-        initComponents();
+
         con = controller;
+        initComponents();        
         cl = new CardLayout();
         creCPanelEvent.setLayout(cl);
         creCPanelEvent.add("crePanelArr",crePanelArr);
@@ -128,7 +129,7 @@ public class CreateFrame extends javax.swing.JInternalFrame {
 
         jLabel16.setText("Date:");
 
-        creCBoxArr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Birthday", "Party", "Conference", " " }));
+        creCBoxArr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Birthday", "Party", "Conference", "Meetings" }));
 
         creFieldArrDate.setText("yyyy-mm-dd");
         creFieldArrDate.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -296,20 +297,7 @@ public class CreateFrame extends javax.swing.JInternalFrame {
         });
 
         creTableBook.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
+                con.viewRoomsArrangement(creCBoxArr.getSelectedItem().toString(),creFieldArrDate.getText()),
             new String [] {
                 "Room No", "Room Type", "Description", "Price", "Select"
             }
@@ -498,20 +486,7 @@ public class CreateFrame extends javax.swing.JInternalFrame {
         });
 
         creTableCat.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
+            con.viewFoodcatering(),
             new String [] {
                 "Name", "Description", "Price", "Quantity"
             }

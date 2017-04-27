@@ -25,7 +25,6 @@ public class Controller {
      * @param checkout
      * @param comment
      * @param roomsBooked
-     * @throws SQLException
      */
     public void createCusBooking(String firstName, String lastName, String mail, String phone, String address, int zip,
                                    String checkIn, String checkout,String comment, ArrayList<String> roomsBooked)  {
@@ -73,12 +72,14 @@ public class Controller {
         }
     }
 
-    public void createCusCatering(){
+    public void createCusCatering(String firstName, String lastName, String mail, String phone, String address, int zip,
+                                  String deliveryAddress, int zipDeliv, int peopleQuantity,String deliveryDate,String comment){
 
 
     }
 
-    public void createCatering(){
+    public void createCatering(long customerID, String deliveryAddress, int zipDeliv, int peopleQuantity,String deliveryDate,
+                               String comment){
 
 
     }

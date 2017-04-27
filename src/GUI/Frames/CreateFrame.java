@@ -1089,7 +1089,8 @@ public class CreateFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_creFieldCatAmountFocusLost
 
     private void creButtonArrSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonArrSearchActionPerformed
-        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_creButtonArrSearchActionPerformed
 
     private void creButtonArrCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonArrCreateActionPerformed
@@ -1153,6 +1154,26 @@ public class CreateFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_creButtonBookCreateActionPerformed
 
     private void creButtonCatCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonCatCreateActionPerformed
+            int amountOfPeople = Integer.parseInt(creFieldCatAmount.getText());
+            String deliveryAddress = creFieldCatAddress.getText();
+            int zipDelivery = Integer.parseInt(creFieldCatZIP.getText());
+            String deliveryDate = creFieldCatDate.getText();
+            String comment = creTAreaCatComment.getText();
+
+        if(creFieldCusID.getText().equalsIgnoreCase("customer id")){
+            String fName = creFieldFName.getText();
+            String lName = creFieldLName.getText();
+            String mail = creFieldEmail.getText();
+            String phoneNo = creFieldPhoneNo.getText();
+            String address = creFieldAddress.getText();
+            int zip = Integer.parseInt(creFieldZIP.getText());
+
+            con.createCusCatering(fName,lName,mail,phoneNo,address,zip,deliveryAddress,zipDelivery,amountOfPeople,deliveryDate,comment);
+        }else{
+
+        }
+
+
 
     }//GEN-LAST:event_creButtonCatCreateActionPerformed
 

@@ -15,6 +15,7 @@ public class DBFacade {
     public Connection con;
     private PreparedStatement ps;
     public CallableStatement cs;
+    public Statement stmt = null;
 
     public DBFacade() {
         openConnection();

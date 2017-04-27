@@ -4,6 +4,7 @@ import Domain.Bookings.*;
 import Domain.*;
 import Technical.*;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
  */
 public class Controller {
     private DBFacade db = new DBFacade();
+    public ArrayList<String> staffFirstName = new ArrayList<String>();
 
     /**
      * Creates a new customer with bookings.
@@ -93,5 +95,21 @@ public class Controller {
 
     public void accountCreate(String userName, String password, String userLevel){
         db.accountCreate(new Account(userName, password, userLevel));
+    }
+
+    public void viewStaff()throws SQLException{
+        db.stmt = db.con.createStatement();
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Staff;");
+
+        for(int i = 0;i<50;i++){
+            staffFirstName.add(null);
+        }
+
+        int i = 0;
+        while (rs.next()) {
+            String firstName = rs.getString(2);
+            staffFirstName.add(i,firstName);
+            i++;
+        }
     }
 }

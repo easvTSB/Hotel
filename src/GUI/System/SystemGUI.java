@@ -203,7 +203,7 @@ public class SystemGUI extends javax.swing.JFrame {
 
     private void jMenuManageEmpActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jMenuManageEmpActionPerformed
         // TODO add your handling code here:
-        EmployeeFrame e = new EmployeeFrame();
+        EmployeeFrame e = new EmployeeFrame(control);
         desktop.add(e);
         e.setVisible(true);
     }//GEN-LAST:event_jMenuManageEmpActionPerformed

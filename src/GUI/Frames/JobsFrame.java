@@ -21,7 +21,7 @@ public class JobsFrame extends javax.swing.JInternalFrame {
      */
     public JobsFrame(Controller con) throws SQLException {
         this.con = con;
-        con.viewJob();
+        con.jobView();
         initComponents();
     }
 
@@ -106,7 +106,11 @@ public class JobsFrame extends javax.swing.JInternalFrame {
         jobButtonDelete.setText("Delete");
         jobButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jobButtonDeleteActionPerformed(evt);
+                try {
+                    jobButtonDeleteActionPerformed(evt);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -200,7 +204,7 @@ public class JobsFrame extends javax.swing.JInternalFrame {
 
     private void jobButtonCreatejActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jobButtonCreatejActionPerformed
         // TODO add your handling code here:
-        con.createJob(jobFieldName.getText(),jobTAreaDesc.getText());
+        con.jobCreate(jobFieldName.getText(),jobTAreaDesc.getText());
         updateTable();
     }                                                                                                                // Variables declaration - do not modify//GEN-LAST:event_jobButtonCreatejActionPerformed
 
@@ -218,12 +222,14 @@ public class JobsFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jobFieldNameFocusLost
 
-    private void jobButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobButtonDeleteActionPerformed
+    private void jobButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jobButtonDeleteActionPerformed
         // TODO add your handling code here:
+        con.jobDelete(jobFieldDelete.getText());
+        updateTable();
     }//GEN-LAST:event_jobButtonDeleteActionPerformed
 
     public void updateTable() throws SQLException {
-        con.viewJob();
+        con.jobView();
         jobTable.setModel(new javax.swing.table.DefaultTableModel(con.jobs,
                 new String [] {
                         "Job Title", "Description"

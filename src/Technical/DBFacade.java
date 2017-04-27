@@ -244,6 +244,18 @@ public class DBFacade {
         }
     }
 
+    public void jobDelete(String job_name) {
+        try {
+            cs = con.prepareCall("{call DeleteJob(?)}");
+            cs.setString(1, job_name);
+
+            cs.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
     public void accountCreate(Account acc){
         String password = Encrypting.encrypt(acc.getPassword());
         try {
@@ -257,6 +269,4 @@ public class DBFacade {
             System.out.println(e.getMessage());
         }
     }
-
-
 }

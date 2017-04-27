@@ -223,6 +223,10 @@ public class Controller {
         }
     }
 
+    public void accountCreate(String userName, String password, String userLevel) {
+        db.accountCreate(new Account(userName, password, userLevel));
+    }
+
     /**
      * -------- STAFF METHODS ---------
      */
@@ -232,10 +236,6 @@ public class Controller {
 
         db.staffCreate(new Staff(fName, lName, phoneNo, email, address, zipCode, jobTitle));
 
-    }
-
-    public void accountCreate(String userName, String password, String userLevel) {
-        db.accountCreate(new Account(userName, password, userLevel));
     }
 
     public void staffDelete(int staff_ID){
@@ -272,12 +272,6 @@ public class Controller {
         }
     }
 
-    public void foodDelete(String foodName){
-        db.foodDelete(foodName);
-    }
-
-
-
 
     /**
      * -------- FOOD MENU METHODS ---------
@@ -301,8 +295,11 @@ public class Controller {
         }
     }
 
-
     public void foodCreate(String name, String desc, double price) {
         db.foodCreate(name, desc, price);
+    }
+
+    public void foodDelete(String foodName){
+        db.foodDelete(foodName);
     }
 }

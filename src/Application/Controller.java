@@ -18,7 +18,7 @@ import static Technical.Encrypting.encrypt;
 public class Controller {
     private DBFacade db = new DBFacade();
     //
-    public Object [][] staff = new Object[30][9];
+    public Object [][] staff;
     public Object [][] foodMenu = new Object[38][4];
 
     /**
@@ -146,7 +146,7 @@ public class Controller {
     }
 
     public void viewStaff()throws SQLException{
-
+        staff = new Object[30][9];
         db.stmt = db.con.createStatement();
         ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Staff;");
         int i = 0;

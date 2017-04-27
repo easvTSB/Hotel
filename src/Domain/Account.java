@@ -26,6 +26,11 @@ public class Account {
         generatePassword();
     }
 
+    public Account(String username, String passWord){
+        this.userName = username;
+        this.passWord = passWord;
+    }
+
     public String getUserName() {
         return userName;
     }

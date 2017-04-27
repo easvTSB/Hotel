@@ -9,7 +9,7 @@ import java.sql.*;
 
 public class DBFacade {
     private String userName = "sa";
-    private String password = "seba0830";
+    private String password = "132456";
     private String port = "1433";
     private String databaseName = "Hotel";
     public Connection con;
@@ -187,16 +187,12 @@ public class DBFacade {
     }
 
     public void accountCreate(Account acc){
+        String password = Encrypting.encrypt(acc.getPassword());
         try {
-            cs = con.prepareCall("{call CreateStaffMember(?,?,?,?,?,?,?,?)}");
-            cs.setString(1,staff.getfName());
-            cs.setString(2,staff.getlName());
-            cs.setString(3,staff.getPhoneNo());
-            cs.setString(4,staff.getEmail());
-            cs.setString(5, staff.getLocalDate().toString());
-            cs.setString(6,staff.getAddress());
-            cs.setInt(7,staff.getZipCode());
-            cs.setString(7,staff.getJobTitle());
+            cs = con.prepareCall("{call CreateAccount(?,?,?)}");
+            cs.setString(1,acc.getUserName());
+            cs.setString(2,password);
+            cs.setString(3,acc.getUserLevel());
 
             cs.execute();
         } catch (SQLException e) {

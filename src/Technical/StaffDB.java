@@ -49,22 +49,22 @@ public class StaffDB extends DBFacade {
 
     }
 
-    public Account createStaffAccount(JTextField fname,JTextField lname,JComboBox comboBox) throws SQLException {
-        Account.setUserName(fname.getText(),lname.getText());
-        Account.setPassword();
-        username = Account.getUserName();
-        password = Account.getPassword();
-        return Creator.createStaffAccount(username,password,comboBox.getSelectedItem().toString());
-    }
+//    public Account createStaffAccount(JTextField fname,JTextField lname,JComboBox comboBox) throws SQLException {
+//        Account.setUserName(fname.getText(),lname.getText());
+//        Account.setPassword();
+//        username = Account.getUserName();
+//        password = Account.getPassword();
+//        return Creator.createStaffAccount(username,password,comboBox.getSelectedItem().toString());
+//    }
 
-    public void generateAccount() throws SQLException {
-        cs = con.prepareCall("{call CreateAccount(?,?,?)}");
-        cs.setString(1, Account.getUserName());
-        cs.setString(2, Account.getPassword());
-        cs.setString(3, Account.getUserLevel());
-        cs.execute();
-        cs.close();
-    }
+//    public void generateAccount() throws SQLException {
+//        cs = con.prepareCall("{call CreateAccount(?,?,?)}");
+//        cs.setString(1, Account.getUserName());
+//        cs.setString(2, Account.getPassword());
+//        cs.setString(3, Account.getUserLevel());
+//        cs.execute();
+//        cs.close();
+//    }
 
     public void deleteStaffMember (int staff_ID) throws SQLException{
         cs = con.prepareCall("{call DeleteStaffMember(?)}");

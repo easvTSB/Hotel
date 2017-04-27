@@ -26,7 +26,7 @@ public class Food {
         foodDB.addFood(name,desc,price);
     }
 
-    public void deleteFood()throws SQLException{
+    public void deleteFood(String name) throws SQLException{
         foodDB.deleteFood(name);
     }
 }

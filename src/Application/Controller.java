@@ -13,7 +13,10 @@ import java.util.ArrayList;
  */
 public class Controller {
     private DBFacade db = new DBFacade();
-    public ArrayList<String> staffFirstName = new ArrayList<String>();
+
+    public ArrayList<String> foodNames = new ArrayList<String>();
+    public ArrayList<String> foodDescriptions = new ArrayList<String>();
+    public ArrayList<Double> foodPrices = new ArrayList<Double>();
 
     /**
      * Creates a new customer with bookings.
@@ -55,6 +58,8 @@ public class Controller {
 
     }
 
+    /** -------- ARRANGEMENT METHODS --------- */
+
     public void createCusArrangement(String firstName, String lastName, String mail, String phone, String address, int zip,
                                      String eventType,String eventDate, String comment, ArrayList<String> roomsBooked ){
 
@@ -74,6 +79,8 @@ public class Controller {
         }
     }
 
+    /** -------- CATERING METHODS --------- */
+
     public void createCusCatering(String firstName, String lastName, String mail, String phone, String address, int zip,
                                   String deliveryAddress, int zipDeliv, int peopleQuantity,String deliveryDate,String comment){
 
@@ -86,6 +93,8 @@ public class Controller {
 
     }
 
+    /** -------- STAFF METHODS --------- */
+
     public void staffCreate(String fName, String lName, String phoneNo, String email,
                             String address, int zipCode, String jobTitle) {
 
@@ -97,18 +106,29 @@ public class Controller {
         db.accountCreate(new Account(userName, password, userLevel));
     }
 
-    public void viewStaff()throws SQLException{
-        db.stmt = db.con.createStatement();
-        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Staff;");
+    /** -------- FOOD MENU METHODS --------- */
 
-        for(int i = 0;i<50;i++){
-            staffFirstName.add(null);
+    public void viewNames()throws SQLException{
+        db.stmt = db.con.createStatement();
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Food;");
+
+        for(int i = 0;i<30;i++){
+            foodNames.add(null);
+            foodDescriptions.add(null);
+            foodPrices.add(null);
         }
 
         int i = 0;
-        while (rs.next()) {
-            String firstName = rs.getString(2);
-            staffFirstName.add(i,firstName);
+        while (rs.next()) {   // only picking the first row
+            String foodName = rs.getString(1);
+            foodNames.add(i,foodName);
+
+            String foodDescription = rs.getString(2);
+            foodDescriptions.add(i,foodDescription);
+
+            double foodPrice = rs.getDouble(3);
+            foodPrices.add(i,foodPrice);
+
             i++;
         }
     }

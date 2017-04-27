@@ -206,6 +206,10 @@ public class DBFacade {
         }
     }
 
+    public void loginAccount(Account acc){
+
+    }
+
     public void staffCreate(Staff staff){
         try {
             cs = con.prepareCall("{call CreateStaffMember(?,?,?,?,?,?,?,?)}");
@@ -238,12 +242,5 @@ public class DBFacade {
         }
     }
 
-//
-//    public void staffEdit(Staff staff){
-//
-//    }
-//
-//    public void staffDelete(Staff staff){
-//
-//    }
+
 }

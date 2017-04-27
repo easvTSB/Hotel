@@ -3,6 +3,7 @@ package Technical;
 import Domain.Account;
 import Domain.Bookings.*;
 import Domain.Customer;
+import Domain.Job;
 import Domain.Staff;
 
 import java.sql.*;
@@ -231,6 +232,30 @@ public class DBFacade {
         }
     }
 
+    public void jobCreate(Job job){
+        try {
+            cs = con.prepareCall("{call CreateJob(?,?)}");
+            cs.setString(1,job.getName());
+            cs.setString(2,job.getDesc());
+
+            cs.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void jobDelete(String job_name) {
+        try {
+            cs = con.prepareCall("{call DeleteJob(?)}");
+            cs.setString(1, job_name);
+
+            cs.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
     public void accountCreate(Account acc){
         String password = Encrypting.encrypt(acc.getPassword());
         try {
@@ -244,6 +269,4 @@ public class DBFacade {
             System.out.println(e.getMessage());
         }
     }
-
-
 }

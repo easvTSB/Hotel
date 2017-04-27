@@ -113,7 +113,11 @@ public class SystemGUI extends javax.swing.JFrame {
         jMenuManageJob.setText("Jobs");
         jMenuManageJob.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuManageJobActionPerformed(evt);
+                try {
+                    jMenuManageJobActionPerformed(evt);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
         jMenuManage.add(jMenuManageJob);
@@ -208,9 +212,9 @@ public class SystemGUI extends javax.swing.JFrame {
         e.setVisible(true);
     }//GEN-LAST:event_jMenuManageEmpActionPerformed
 
-    private void jMenuManageJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuManageJobActionPerformed
+    private void jMenuManageJobActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jMenuManageJobActionPerformed
         // TODO add your handling code here:
-        JobsFrame j = new JobsFrame();
+        JobsFrame j = new JobsFrame(control);
         desktop.add(j);
         j.setVisible(true);
     }//GEN-LAST:event_jMenuManageJobActionPerformed

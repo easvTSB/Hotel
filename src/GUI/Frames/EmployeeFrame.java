@@ -22,6 +22,7 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
     /**
      * Creates new form Frame1
      */
+
     public EmployeeFrame(Controller con) throws SQLException {
         this.con = con;
         con.viewStaff();
@@ -75,8 +76,7 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         setAlignmentY(0.0F);
         setPreferredSize(new java.awt.Dimension(1200, 779));
 
-        empTable.setModel(new javax.swing.table.DefaultTableModel(
-                con.staff,
+        empTable.setModel(new javax.swing.table.DefaultTableModel(con.staff,
             new String [] {
                 "Employee ID", "Name", "Email", "Phone No", "Address", "ZIP", "Start Date", "User Name", "User Level"
             }
@@ -233,7 +233,7 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
 
         empCBoxLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrator", "Employee" }));
 
-        empCBOXTitle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Receptionist", "Cook", "Administrator", " " }));
+        empCBOXTitle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Receptionist", "Chef", "Manager", "Janitor" }));
 
         jLabel21.setText("Employee ID:");
 
@@ -557,7 +557,33 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
 
         con.staffCreate(empFName,empLName,empPhoneno,empEmail,empAddress,empZIP,empTitle);
         con.accountCreate(empFName,empLName,empLevel);
+        updateRow();
     }//GEN-LAST:event_empButtonCreateActionPerformed
+
+    private void updateRow() throws SQLException {
+        con.viewStaff();
+        empTable.setModel(new javax.swing.table.DefaultTableModel(con.staff,
+                new String [] {
+                        "Employee ID", "Name", "Email", "Phone No", "Address", "ZIP", "Start Date", "User Name", "User Level"
+                }
+        ) {
+            Class[] types = new Class [] {
+                    Integer.class, String.class, String.class, String.class, String.class, Integer.class, String.class, String.class, Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                    false, true, true, true, true, true, true, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+    }
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

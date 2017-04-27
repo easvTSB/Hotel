@@ -17,11 +17,14 @@ import static Technical.Encrypting.encrypt;
  */
 public class Controller {
     private DBFacade db = new DBFacade();
-    public Object [][] staff = new Object[30][9];
-    public Object [][] foodMenu = new Object[38][4];
+    //
+    public Object[][] staff;
+    public Object[][] jobs;
+    public Object[][] foodMenu = new Object[38][4];
 
     /**
      * Creates a new customer with bookings.
+     *
      * @param firstName
      * @param lastName
      * @param mail
@@ -34,42 +37,45 @@ public class Controller {
      * @param roomsBooked
      */
     public void createCusBooking(String firstName, String lastName, String mail, String phone, String address, int zip,
-                                   String checkIn, String checkout,String comment, ArrayList<String> roomsBooked)  {
+                                 String checkIn, String checkout, String comment, ArrayList<String> roomsBooked) {
 
-        db.createCustomer(new Customer(firstName,lastName,mail,phone,address,zip));
-        db.createBookingCus(new Booking(1,false,comment));
-        for(int i = 0 ; i < roomsBooked.size(); i++){
-            db.createBookingTransactionCus(new BookingTransactions(roomsBooked.get(i),checkIn,checkout));
+        db.createCustomer(new Customer(firstName, lastName, mail, phone, address, zip));
+        db.createBookingCus(new Booking(1, false, comment));
+        for (int i = 0; i < roomsBooked.size(); i++) {
+            db.createBookingTransactionCus(new BookingTransactions(roomsBooked.get(i), checkIn, checkout));
         }
     }
 
     /**
      * Creates booking with existing customer.
+     *
      * @param customerID
      * @param checkIn
      * @param checkOut
      * @param comment
      * @param roomsBooked
      */
-    public void createBooking(long customerID, String checkIn, String checkOut,String comment, ArrayList<String> roomsBooked)  {
+    public void createBooking(long customerID, String checkIn, String checkOut, String comment, ArrayList<String> roomsBooked) {
         // Creates an booking with customer
-        db.createBooking(new Booking(1,false,comment),customerID);
+        db.createBooking(new Booking(1, false, comment), customerID);
         // For loop creating corresponding booking transactions.
-        for(int i = 0 ; i < roomsBooked.size(); i++){
-            db.createBookingTransactionCus(new BookingTransactions(roomsBooked.get(i),checkIn,checkOut));
+        for (int i = 0; i < roomsBooked.size(); i++) {
+            db.createBookingTransactionCus(new BookingTransactions(roomsBooked.get(i), checkIn, checkOut));
         }
 
     }
 
-    /** -------- ARRANGEMENT METHODS --------- */
+    /**
+     * -------- ARRANGEMENT METHODS ---------
+     */
 
     public void createCusArrangement(String firstName, String lastName, String mail, String phone, String address, int zip,
-                                     String eventType,String eventDate, String comment, ArrayList<String> roomsBooked ){
+                                     String eventType, String eventDate, String comment, ArrayList<String> roomsBooked) {
 
-        db.createCustomer(new Customer(firstName,lastName,mail,phone,address,zip));
-        db.createArrangementCus(new Arrangement(eventType,1,false,comment));
-        for(int i = 0 ; i < roomsBooked.size(); i++){
-            db.createArrangementTransactionCus(new ArrangementTransactions(roomsBooked.get(i),eventDate));
+        db.createCustomer(new Customer(firstName, lastName, mail, phone, address, zip));
+        db.createArrangementCus(new Arrangement(eventType, 1, false, comment));
+        for (int i = 0; i < roomsBooked.size(); i++) {
+            db.createArrangementTransactionCus(new ArrangementTransactions(roomsBooked.get(i), eventDate));
         }
 
 
@@ -77,40 +83,44 @@ public class Controller {
 
     /**
      * Creates an arrangement and corresponding transactions, with an already existing customer.
+     *
      * @param customerID
      * @param eventType
      * @param eventDate
      * @param comment
      * @param roomsBooked
      */
-    public void createArrangement(long customerID,String eventType,String eventDate, String comment, ArrayList<String> roomsBooked){
+    public void createArrangement(long customerID, String eventType, String eventDate, String comment, ArrayList<String> roomsBooked) {
         // creates an arrangement with already existing customer
-        db.createArrangement(new Arrangement(eventType,1,false,comment), customerID);
+        db.createArrangement(new Arrangement(eventType, 1, false, comment), customerID);
         // For loop creating the arrangement transactions.
-        for(int i = 0 ; i < roomsBooked.size(); i++){
-            db.createArrangementTransactionCus(new ArrangementTransactions(roomsBooked.get(i),eventDate));
+        for (int i = 0; i < roomsBooked.size(); i++) {
+            db.createArrangementTransactionCus(new ArrangementTransactions(roomsBooked.get(i), eventDate));
         }
     }
 
-    /** -------- CATERING METHODS --------- */
+    /**
+     * -------- CATERING METHODS ---------
+     */
 
     public void createCusCatering(String firstName, String lastName, String mail, String phone, String address, int zip,
-                                  String deliveryAddress, int zipDeliv, int peopleQuantity,String deliveryTime,String deliveryDate,String comment,
-                                  ArrayList<String> foodItems, ArrayList<Integer> foodAmount){
+                                  String deliveryAddress, int zipDeliv, int peopleQuantity, String deliveryTime, String deliveryDate, String comment,
+                                  ArrayList<String> foodItems, ArrayList<Integer> foodAmount) {
 
         // Creates a customer.
-        db.createCustomer(new Customer(firstName,lastName,mail,phone,address,zip));
+        db.createCustomer(new Customer(firstName, lastName, mail, phone, address, zip));
         // Creates a catering order with the customer.
-        db.createCateringCus(new Catering(1,deliveryAddress,zipDeliv,peopleQuantity,deliveryTime,deliveryDate,false,comment));
+        db.createCateringCus(new Catering(1, deliveryAddress, zipDeliv, peopleQuantity, deliveryTime, deliveryDate, false, comment));
         // For loop that adds all the items related to the catering order.
-        for(int i = 0 ; i < foodItems.size() ; i++){
-            db.createCateringFood(new CateringTransactions(foodItems.get(i),foodAmount.get(i)));
+        for (int i = 0; i < foodItems.size(); i++) {
+            db.createCateringFood(new CateringTransactions(foodItems.get(i), foodAmount.get(i)));
         }
 
     }
 
     /**
      * Creates a catering order with already existing
+     *
      * @param customerID
      * @param deliveryAddress
      * @param zipDeliv
@@ -120,18 +130,48 @@ public class Controller {
      * @param foodItems
      * @param foodAmount
      */
-    public void createCatering(long customerID,String deliveryAddress, int zipDeliv, int peopleQuantity,String deliveryDate,
-                               String deliveryTime,String comment, ArrayList<String> foodItems, ArrayList<Integer> foodAmount){
+    public void createCatering(long customerID, String deliveryAddress, int zipDeliv, int peopleQuantity, String deliveryDate,
+                               String deliveryTime, String comment, ArrayList<String> foodItems, ArrayList<Integer> foodAmount) {
 
         // Creates a catering order with already existing customer.
-        db.createCatering(new Catering(1,deliveryAddress,zipDeliv,peopleQuantity,deliveryTime,deliveryDate,false,comment), customerID);
+        db.createCatering(new Catering(1, deliveryAddress, zipDeliv, peopleQuantity, deliveryTime, deliveryDate, false, comment), customerID);
         // For loop that adds all the items related to the catering order.
-        for(int i = 0 ; i < foodItems.size() ; i++){
-            db.createCateringFood(new CateringTransactions(foodItems.get(i),foodAmount.get(i)));
+        for (int i = 0; i < foodItems.size(); i++) {
+            db.createCateringFood(new CateringTransactions(foodItems.get(i), foodAmount.get(i)));
         }
     }
 
-    /** -------- STAFF METHODS --------- */
+    /**
+     * -------- Jobs METHODS ---------
+     */
+
+    public void jobCreate(String name, String desc) {
+        db.jobCreate(new Job(name, desc));
+    }
+
+    public void jobDelete(String name) {
+        db.jobDelete(name);
+    }
+
+    public void jobView() throws SQLException {
+        jobs = new Object[30][2];
+        db.stmt = db.con.createStatement();
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.JobTitle;");
+        int i = 0;
+        while (rs.next()) {
+            String title = rs.getString(1);
+            String desc = rs.getString(2);
+
+            jobs[i][0] = title;
+            jobs[i][1] = desc;
+
+            i++;
+        }
+    }
+
+    /**
+     * -------- STAFF METHODS ---------
+     */
 
     public void staffCreate(String fName, String lName, String phoneNo, String email,
                             String address, int zipCode, String jobTitle) {
@@ -140,12 +180,12 @@ public class Controller {
 
     }
 
-    public void accountCreate(String userName, String password, String userLevel){
+    public void accountCreate(String userName, String password, String userLevel) {
         db.accountCreate(new Account(userName, password, userLevel));
     }
 
-    public void viewStaff()throws SQLException{
-
+    public void viewStaff() throws SQLException {
+        staff = new Object[30][9];
         db.stmt = db.con.createStatement();
         ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Staff;");
         int i = 0;
@@ -160,24 +200,26 @@ public class Controller {
             int cityZip = rs.getInt(8);
             String occupation = rs.getString(9);
 
-            staff[i][0]=id ;
-            staff[i][1]=firstName;
-            staff[i][2]=lastName;
-            staff[i][3]=phoneNo;
-            staff[i][4]=email;
-            staff[i][5]=startDate;
-            staff[i][6]=address;
-            staff[i][7]=cityZip;
-            staff[i][8]=occupation;
+            staff[i][0] = id;
+            staff[i][1] = firstName;
+            staff[i][2] = lastName;
+            staff[i][3] = phoneNo;
+            staff[i][4] = email;
+            staff[i][5] = startDate;
+            staff[i][6] = address;
+            staff[i][7] = cityZip;
+            staff[i][8] = occupation;
 
             i++;
         }
     }
 
-    /** -------- FOOD MENU METHODS --------- */
 
+    /**
+     * -------- FOOD MENU METHODS ---------
+     */
 
-    public void viewFood() throws SQLException{
+    public void viewFood() throws SQLException {
 
         db.stmt = db.con.createStatement();
         ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Food;");

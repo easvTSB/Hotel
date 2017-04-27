@@ -5,16 +5,23 @@
  */
 package GUI.Frames;
 
+import Application.Controller;
+
+import java.sql.SQLException;
+
 /**
  *
  * @author LPNielsen
  */
 public class JobsFrame extends javax.swing.JInternalFrame {
+    Controller con;
 
     /**
      * Creates new form Jobs
      */
-    public JobsFrame() {
+    public JobsFrame(Controller con) throws SQLException {
+        this.con = con;
+        con.jobView();
         initComponents();
     }
 
@@ -50,49 +57,7 @@ public class JobsFrame extends javax.swing.JInternalFrame {
 
         jLabel27.setText("Job Name: ");
 
-        jobTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
+        jobTable.setModel(new javax.swing.table.DefaultTableModel(con.jobs,
             new String [] {
                 "Job Title", "Description"
             }
@@ -141,14 +106,22 @@ public class JobsFrame extends javax.swing.JInternalFrame {
         jobButtonDelete.setText("Delete");
         jobButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jobButtonDeleteActionPerformed(evt);
+                try {
+                    jobButtonDeleteActionPerformed(evt);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         jobButtonCreate.setText("Create");
         jobButtonCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jobButtonCreatejActionPerformed(evt);
+                try {
+                    jobButtonCreatejActionPerformed(evt);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -229,8 +202,10 @@ public class JobsFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jobFieldDeleteFocusLost
 
-    private void jobButtonCreatejActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobButtonCreatejActionPerformed
+    private void jobButtonCreatejActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jobButtonCreatejActionPerformed
         // TODO add your handling code here:
+        con.jobCreate(jobFieldName.getText(),jobTAreaDesc.getText());
+        updateTable();
     }                                                                                                                // Variables declaration - do not modify//GEN-LAST:event_jobButtonCreatejActionPerformed
 
     private void jobFieldNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jobFieldNameFocusGained
@@ -247,9 +222,36 @@ public class JobsFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jobFieldNameFocusLost
 
-    private void jobButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobButtonDeleteActionPerformed
+    private void jobButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jobButtonDeleteActionPerformed
         // TODO add your handling code here:
+        con.jobDelete(jobFieldDelete.getText());
+        updateTable();
     }//GEN-LAST:event_jobButtonDeleteActionPerformed
+
+    public void updateTable() throws SQLException {
+        con.jobView();
+        jobTable.setModel(new javax.swing.table.DefaultTableModel(con.jobs,
+                new String [] {
+                        "Job Title", "Description"
+                }
+        ) {
+            Class[] types = new Class [] {
+                    String.class, String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jobTable.setColumnSelectionAllowed(true);
+        jobTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane5.setViewportView(jobTable);
+        jobTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        if (jobTable.getColumnModel().getColumnCount() > 0) {
+            jobTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+            jobTable.getColumnModel().getColumn(1).setPreferredWidth(600);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

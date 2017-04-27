@@ -1,7 +1,11 @@
 package Domain;
 
+import Technical.DBFacade;
 import Technical.Encrypting;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Random;
 
 

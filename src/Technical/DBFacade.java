@@ -13,6 +13,7 @@ public class DBFacade {
     private String port = "1433";
     private String databaseName = "Hotel";
     public Connection con;
+    public Statement stmt;
     private PreparedStatement ps;
     public CallableStatement cs;
 

@@ -20,7 +20,6 @@ public class Catering {
 
     /**
      * Constructor for creating a catering order.
-     * @param customerID
      * @param staffID
      * @param deliveryAddress
      * @param zip
@@ -28,9 +27,8 @@ public class Catering {
      * @param deliveryDate
      * @param paid
      */
-    public Catering(int customerID, int staffID, String deliveryAddress, int zip, int peopleQuantity,
-                     String deliveryDate, boolean paid) {
-        this.customerID = customerID;
+    public Catering(int staffID, String deliveryAddress, int zip, int peopleQuantity,
+                     String deliveryDate, boolean paid, String comment) {
         this.staffID = staffID;
         this.deliveryAddress = deliveryAddress;
         this.zip = zip;
@@ -39,6 +37,7 @@ public class Catering {
         this.dateOrdered = DateTimeFormatter.ofPattern("yyy-MM-dd").format(localDate);
         this.deliveryDate = deliveryDate;
         this.paid = paid;
+        this.comment = comment;
     }
 
     /**
@@ -54,7 +53,7 @@ public class Catering {
      * @param paid
      */
     public Catering(int cateringOrderID, int customerID, int staffID, String deliveryAddress, int zip, int peopleQuantity,
-                    String dateOrdered, String deliveryDate, boolean paid) {
+                    String dateOrdered, String deliveryDate, boolean paid, String comment) {
         this.cateringOrderID = cateringOrderID;
         this.customerID = customerID;
         this.staffID = staffID;
@@ -64,6 +63,7 @@ public class Catering {
         this.dateOrdered = dateOrdered;
         this.deliveryDate = deliveryDate;
         this.paid = paid;
+        this.comment = comment;
     }
 
     public int getCateringOrderID() {

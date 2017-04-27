@@ -85,15 +85,40 @@ public class Controller {
     /** -------- CATERING METHODS --------- */
 
     public void createCusCatering(String firstName, String lastName, String mail, String phone, String address, int zip,
-                                  String deliveryAddress, int zipDeliv, int peopleQuantity,String deliveryDate,String comment){
+                                  String deliveryAddress, int zipDeliv, int peopleQuantity,String deliveryDate,String comment,
+                                  ArrayList<String> foodItems, ArrayList<Integer> foodAmount){
 
+        // Creates a customer.
+        db.createCustomer(new Customer(firstName,lastName,mail,phone,address,zip));
+        // Creates a catering order with the customer.
+        db.createCateringCus(new Catering(1,deliveryAddress,zipDeliv,peopleQuantity,deliveryDate,false,comment));
+        // For loop that adds all the items related to the catering order.
+        for(int i = 0 ; i < foodItems.size() ; i++){
+            db.createCateringFood(new CateringTransactions(foodItems.get(i),foodAmount.get(i)));
+        }
 
     }
 
-    public void createCatering(long customerID, String deliveryAddress, int zipDeliv, int peopleQuantity,String deliveryDate,
-                               String comment){
-        //
+    /**
+     * Creates a catering order with already existing
+     * @param customerID
+     * @param deliveryAddress
+     * @param zipDeliv
+     * @param peopleQuantity
+     * @param deliveryDate
+     * @param comment
+     * @param foodItems
+     * @param foodAmount
+     */
+    public void createCatering(long customerID,String deliveryAddress, int zipDeliv, int peopleQuantity,String deliveryDate,
+                               String comment, ArrayList<String> foodItems, ArrayList<Integer> foodAmount){
 
+        // Creates a catering order with already existing customer.
+        db.createCatering(new Catering(1,deliveryAddress,zipDeliv,peopleQuantity,deliveryDate,false,comment), customerID);
+        // For loop that adds all the items related to the catering order.
+        for(int i = 0 ; i < foodItems.size() ; i++){
+            db.createCateringFood(new CateringTransactions(foodItems.get(i),foodAmount.get(i)));
+        }
     }
 
     /** -------- STAFF METHODS --------- */

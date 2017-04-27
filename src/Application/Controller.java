@@ -289,10 +289,9 @@ public class Controller {
             String foodDescription = rs.getString(2);
             Double foodPrice = rs.getDouble(3);
 
-            foodMenu[i][0] = null;
-            foodMenu[i][1] = foodName;
-            foodMenu[i][2] = foodDescription;
-            foodMenu[i][3] = foodPrice;
+            foodMenu[i][0] = foodName;
+            foodMenu[i][1] = foodDescription;
+            foodMenu[i][2] = foodPrice;
 
             i++;
         }

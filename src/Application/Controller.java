@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static Technical.Encrypting.encrypt;
+
 /**
  * Created by LPNielsen on 26-Apr-17.
  */
@@ -133,6 +135,7 @@ public class Controller {
             i++;
         }
     }
+
     public void viewStaff()throws SQLException {
         db.stmt = db.con.createStatement();
         ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Staff;");

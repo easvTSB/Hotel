@@ -9,6 +9,8 @@ import Application.Controller;
 
 import javax.swing.*;
 import java.awt.CardLayout;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,15 +18,14 @@ import java.awt.CardLayout;
  */
 public class CreateFrame extends javax.swing.JInternalFrame {
     private CardLayout cl;
-    private Controller controller;
+    private Controller con;
     /**
      * Creates new form CreateFrame
      */
-    public CreateFrame(Controller con) {
+    public CreateFrame(Controller controller) {
         initComponents();
-        controller = con;
+        con = controller;
         cl = new CardLayout();
-        controller = con;
         creCPanelEvent.setLayout(cl);
         creCPanelEvent.add("crePanelArr",crePanelArr);
         creCPanelEvent.add("crePanelBook",crePanelBook);
@@ -272,7 +273,7 @@ public class CreateFrame extends javax.swing.JInternalFrame {
 
         creCPanelEvent.add(crePanelArr, "card2");
 
-        creCBoxBook.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Standard", "Honeymoon", "Ocean View" }));
+        creCBoxBook.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single", "Double", "Twin","Honeymoon Suite" }));
 
         creFieldBookDateFrom.setText("yyyy-mm-dd");
         creFieldBookDateFrom.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1088,13 +1089,33 @@ public class CreateFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_creFieldCatAmountFocusLost
 
     private void creButtonArrSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonArrSearchActionPerformed
-        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_creButtonArrSearchActionPerformed
 
     private void creButtonArrCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonArrCreateActionPerformed
+        String eventType = creCBoxArr.getSelectedItem().toString();
+        String eventDate = creFieldArrDate.getText();
+        String comment = creTAreaArrComment.getText();
 
+        //ArrayList for checking the current code...
+        ArrayList<String> testArray = new ArrayList<>();
+        testArray.add("001");
+        testArray.add("002");
 
+        if(creFieldCusID.getText().equalsIgnoreCase("customer id")){
+            String fName = creFieldFName.getText();
+            String lName = creFieldLName.getText();
+            String mail = creFieldEmail.getText();
+            String phoneNo = creFieldPhoneNo.getText();
+            String address = creFieldAddress.getText();
+            int zip = Integer.parseInt(creFieldZIP.getText());
 
+            con.createCusArrangement(fName,lName,mail,phoneNo,address,zip,eventType,eventDate,comment,testArray);
+        }else{
+            long customerID = Long.parseLong(creFieldCusID.getText());
+            con.createArrangement(customerID,eventType,eventDate,comment,testArray);
+        }
 
     }//GEN-LAST:event_creButtonArrCreateActionPerformed
 
@@ -1104,17 +1125,66 @@ public class CreateFrame extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_creButtonBookSearchActionPerformed
 
-    private void creButtonBookCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonBookCreateActionPerformed
-        if(creFieldCusID.getText().equalsIgnoreCase("customer id")){
-            String resultMessage = controller.createCusBooking();
-            JOptionPane.showMessageDialog(crePanelBook,resultMessage);
-        }else{
+    private void creButtonBookCreateActionPerformed(java.awt.event.ActionEvent evt)  {//GEN-FIRST:event_creButtonBookCreateActionPerformed
 
+        String checkIn = creFieldBookDateFrom.getText();
+        String checkOut = creFieldBookDateTo.getText();
+        String comment = creTAreaBookComment.getText();
+
+        //ArrayList for checking the current code...
+        ArrayList<String> testArray = new ArrayList<>();
+        testArray.add("101");
+        testArray.add("102");
+
+        if(creFieldCusID.getText().equalsIgnoreCase("customer id")){
+            String fName = creFieldFName.getText();
+            String lName = creFieldLName.getText();
+            String mail = creFieldEmail.getText();
+            String phoneNo = creFieldPhoneNo.getText();
+            String address = creFieldAddress.getText();
+            int zip = Integer.parseInt(creFieldZIP.getText());
+
+            con.createCusBooking(fName,lName,mail,phoneNo,address,zip,checkIn,checkOut,comment,testArray);
+        }else{
+            long customerID = Long.parseLong(creFieldCusID.getText());
+
+            con.createBooking(customerID,checkIn,checkOut,comment,testArray);
         }
 
     }//GEN-LAST:event_creButtonBookCreateActionPerformed
 
     private void creButtonCatCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonCatCreateActionPerformed
+            int amountOfPeople = Integer.parseInt(creFieldCatAmount.getText());
+            String deliveryAddress = creFieldCatAddress.getText();
+            int zipDelivery = Integer.parseInt(creFieldCatZIP.getText());
+            String deliveryDate = creFieldCatDate.getText();
+            String deliveryTime = creJBoxCatTime.getSelectedItem().toString();
+            String comment = creTAreaCatComment.getText();
+
+            // Hardcoded test data to see if it works
+            ArrayList<String> foodItems = new ArrayList<>();
+            ArrayList<Integer> quantity = new ArrayList<>();
+            foodItems.add("Coca-cola");
+            foodItems.add("Cheese Burger");
+            quantity.add(4);
+            quantity.add(4);
+
+        if(creFieldCusID.getText().equalsIgnoreCase("customer id")){
+            String fName = creFieldFName.getText();
+            String lName = creFieldLName.getText();
+            String mail = creFieldEmail.getText();
+            String phoneNo = creFieldPhoneNo.getText();
+            String address = creFieldAddress.getText();
+            int zip = Integer.parseInt(creFieldZIP.getText());
+
+            con.createCusCatering(fName,lName,mail,phoneNo,address,zip,deliveryAddress,zipDelivery,amountOfPeople,deliveryTime,deliveryDate,comment,foodItems,quantity);
+        }else{
+            int customerID = Integer.parseInt(creFieldCusID.getText());
+
+            con.createCatering(customerID,deliveryAddress,zipDelivery,amountOfPeople,deliveryTime,deliveryDate,comment,foodItems,quantity);
+        }
+
+
 
     }//GEN-LAST:event_creButtonCatCreateActionPerformed
 

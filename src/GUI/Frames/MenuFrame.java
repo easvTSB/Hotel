@@ -5,16 +5,27 @@
  */
 package GUI.Frames;
 
+import Application.Controller;
+import Domain.Food;
+
+import java.sql.SQLException;
+
 /**
  *
  * @author LPNielsen
  */
 public class MenuFrame extends javax.swing.JInternalFrame {
-
+    private Controller controller = new Controller();
     /**
      * Creates new form RestaurantFrame
      */
     public MenuFrame() {
+        try{
+            controller.viewFood();
+        }catch (SQLException e){
+
+        }
+
         initComponents();
     }
 
@@ -48,47 +59,8 @@ public class MenuFrame extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(1200, 779));
 
         menuTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
+
+                controller.foodMenu,
             new String [] {
                 "Food ID", "Name", "Description", "Price"
             }
@@ -127,7 +99,7 @@ public class MenuFrame extends javax.swing.JInternalFrame {
 
         jLabel27.setText("Price:");
 
-        menuFieldPrice.setText("Price");
+        menuFieldPrice.setText("0.99");
         menuFieldPrice.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 menuFieldPriceFocusGained(evt);
@@ -315,11 +287,24 @@ public class MenuFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_menuFieldPriceFocusLost
 
     private void menuButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonDeleteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuButtonDeleteActionPerformed
+        double price = Double.parseDouble(menuFieldPrice.getText().toString());
+        try {
+            Food food = new Food(menuFieldName.getText().toString(), menuTAreaDesc.getText().toString(), price);
+            food.deleteFood(menuFieldFoodIDDelete.getText().toString());
+        }catch (SQLException e ){
+
+        }//GEN-LAST:event_menuButtonDeleteActionPerformed
+    }
 
     private void menuButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonCreateActionPerformed
         // TODO add your handling code here:
+        double price = Double.parseDouble(menuFieldPrice.getText().toString());
+        try {
+            Food food = new Food(menuFieldName.getText().toString(), menuTAreaDesc.getText().toString(), price);
+            food.createFood();
+        } catch (SQLException e) {
+
+        }
     }//GEN-LAST:event_menuButtonCreateActionPerformed
 
 

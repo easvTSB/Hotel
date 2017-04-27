@@ -13,44 +13,66 @@ import java.util.Random;
  * Created by Sebas on 25-04-2017.
  */
 public class Account {
-    private static String symbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy";
-    private static Random rand = new Random();
-    private static String userName;
-    private static String passWord;
-    private static String userLevel;
+    private String symbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy";
+    private Random rand = new Random();
+    private String fName;
+    private int ID;
+    private String lName;
+    private String userName;
+    private String passWord;
+    private String userLevel;
 
-    public Account(String username, String password){
-        userName = username;
-        passWord = password;
-    }
-
-    public Account(String userName, String password, String userLevel) {
-        this.userName = userName;
-        this.passWord = password;
+    public Account(String FName, String LName, String userLevel){
+        this.fName = FName;
+        this.lName = LName;
         this.userLevel = userLevel;
-    }
 
-    public static String getUserName() {
-        return userName;
-    }
-
-    public static String getPassword() {
-        return passWord;
-    }
-
-    public static String getUserLevel() {
-        return userLevel;
-    }
-
-    public static void setPassword(){
+        generateUsername(lName,fName);
         generatePassword();
     }
 
-    public static void setUserName(String fName, String lName){
-        generateUsername(fName,lName);
+    public Account(String username, String passWord){
+        this.userName = username;
+        this.passWord = passWord;
     }
 
-    private static void generateUsername(String fName, String lName){
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public void setUserLevel(String userLevel) {
+        this.userLevel = userLevel;
+    }
+
+    public String getPassWord() {
+        return passWord;
+    }
+
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
+
+    public String getPassword() {
+        return passWord;
+    }
+
+    public String getUserLevel() {
+        return userLevel;
+    }
+
+    private void generateUsername(String fName, String lName){
         String username = "";
         for (int i = 0; i < fName.length(); i++) {
             if (i <=3) {
@@ -65,12 +87,11 @@ public class Account {
         userName = username;
     }
 
-    private static void generatePassword() {
+    private void generatePassword() {
         String password = "";
         for (int i = 1; i<=6;i++){
             password += symbols.charAt(rand.nextInt(symbols.length()));
         }
-        password = Encrypting.encrypt(password);
         passWord = password;
     }
 }

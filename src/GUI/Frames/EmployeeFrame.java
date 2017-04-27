@@ -5,10 +5,12 @@
  */
 package GUI.Frames;
 
-import Application.Creator;
-import Domain.Staff;
-import Technical.StaffDB;
+import Application.Controller;
+import Technical.DBFacade;
 
+import java.sql.CallableStatement;
+import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -16,13 +18,16 @@ import java.sql.SQLException;
  * @author LPNielsen
  */
 public class EmployeeFrame extends javax.swing.JInternalFrame {
-    Staff staff;
+    private Controller con;
     /**
      * Creates new form Frame1
      */
-    public EmployeeFrame() throws SQLException {
+    public EmployeeFrame(Controller con) throws SQLException {
+        this.con = con;
+        con.viewStaff();
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,51 +76,7 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(1200, 779));
 
         empTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
-            },
+                con.staff,
             new String [] {
                 "Employee ID", "Name", "Email", "Phone No", "Address", "ZIP", "Start Date", "User Name", "User Level"
             }
@@ -590,13 +551,12 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         String empPhoneno = empFieldCreatePhoneNo.getText();
         String empEmail = empFieldCreateEmail.getText();
         String empAddress = empFieldCreateAddress.getText();
-        String empZIP = empFieldCreateZIP.getText();
+        int empZIP = Integer.parseInt(empFieldCreateZIP.getText());
         String empTitle = empCBOXTitle.getSelectedItem().toString();
+        String empLevel = empCBoxLevel.getSelectedItem().toString();
 
-        staff = new Staff(empFName,empLName,empPhoneno,empEmail,empAddress,Integer.parseInt(empZIP),empTitle);
-        staff.createEmployee();
-        staff.createStaffAccount(empCBoxLevel.getSelectedItem().toString());
-
+        con.staffCreate(empFName,empLName,empPhoneno,empEmail,empAddress,empZIP,empTitle);
+        con.accountCreate(empFName,empLName,empLevel);
     }//GEN-LAST:event_empButtonCreateActionPerformed
 
 

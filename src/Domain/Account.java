@@ -9,11 +9,11 @@ import java.util.Random;
  * Created by Sebas on 25-04-2017.
  */
 public class Account {
-    private static String symbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy";
-    private static Random rand = new Random();
-    private static String userName;
-    private static String passWord;
-    private static String userLevel;
+    private String symbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy";
+    private Random rand = new Random();
+    private String userName;
+    private String passWord;
+    private String userLevel;
 
     public Account(String username, String password){
         userName = username;
@@ -26,27 +26,27 @@ public class Account {
         this.userLevel = userLevel;
     }
 
-    public static String getUserName() {
+    public String getUserName() {
         return userName;
     }
 
-    public static String getPassword() {
+    public String getPassword() {
         return passWord;
     }
 
-    public static String getUserLevel() {
+    public String getUserLevel() {
         return userLevel;
     }
 
-    public static void setPassword(){
+    public void setPassword(){
         generatePassword();
     }
 
-    public static void setUserName(String fName, String lName){
+    public void setUserName(String fName, String lName){
         generateUsername(fName,lName);
     }
 
-    private static void generateUsername(String fName, String lName){
+    private void generateUsername(String fName, String lName){
         String username = "";
         for (int i = 0; i < fName.length(); i++) {
             if (i <=3) {
@@ -61,7 +61,7 @@ public class Account {
         userName = username;
     }
 
-    private static void generatePassword() {
+    private void generatePassword() {
         String password = "";
         for (int i = 1; i<=6;i++){
             password += symbols.charAt(rand.nextInt(symbols.length()));

@@ -272,6 +272,10 @@ public class Controller {
         }
     }
 
+    public void foodDelete(String foodName){
+        db.foodDelete(foodName);
+    }
+
 
 
 
@@ -298,4 +302,7 @@ public class Controller {
     }
 
 
+    public void foodCreate(String name, String desc, double price) {
+        db.foodCreate(name, desc, price);
+    }
 }

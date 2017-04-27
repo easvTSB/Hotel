@@ -266,7 +266,6 @@ public class DBFacade {
         }
     }
 
-
     public void accountCreate(Account acc){
         String password = Encrypting.encrypt(acc.getPassword());
         try {
@@ -274,6 +273,30 @@ public class DBFacade {
             cs.setString(1,acc.getUserName());
             cs.setString(2,password);
             cs.setString(3,acc.getUserLevel());
+
+            cs.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void foodDelete(String foodName) {
+        try {
+            cs = con.prepareCall("{call DeleteFood(?)}");
+            cs.setString(1, foodName);
+
+            cs.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void foodCreate(String name, String desc, double price) {
+        try {
+            cs = con.prepareCall("{call CreateFood(?,?,?)}");
+            cs.setString(1,name);
+            cs.setString(2,desc);
+            cs.setDouble(3,price);
 
             cs.execute();
         } catch (SQLException e) {

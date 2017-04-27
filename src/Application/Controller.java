@@ -1,8 +1,7 @@
 package Application;
 
+import Domain.Bookings.*;
 import Domain.*;
-import Domain.Bookings.Booking;
-import Domain.Bookings.BookingTransactions;
 import Technical.*;
 
 import java.sql.SQLException;
@@ -55,7 +54,14 @@ public class Controller {
 
     }
 
-    public void createCusArrangement(){
+    public void createCusArrangement(String firstName, String lastName, String mail, String phone, String address, int zip,
+                                     String eventType,String eventDate, String comment, ArrayList<String> roomsBooked ){
+
+        db.createCustomer(new Customer(firstName,lastName,mail,phone,address,zip));
+        db.createArrangementCus(new Arrangement(eventType,1,false,comment));
+        for(int i = 0 ; i < roomsBooked.size(); i++){
+            db.createArrangementTransactionCus(new ArrangementTransactions(roomsBooked.get(i),eventDate));
+        }
 
 
     }

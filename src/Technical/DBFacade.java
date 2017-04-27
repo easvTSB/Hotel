@@ -143,7 +143,7 @@ public class DBFacade {
 
     public void createArrangementTransactionCus(ArrangementTransactions arrT) {
         try {
-            cs = con.prepareCall("{call InsertArrangementTransaction(?,?,?,?,?)}");
+            cs = con.prepareCall("{call InsertArrangementTransaction(?,?,?,?)}");
             cs.setString(1, arrT.getRoomNo());
             cs.setString(2, arrT.getEventDate());
 

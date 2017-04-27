@@ -1093,9 +1093,29 @@ public class CreateFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_creButtonArrSearchActionPerformed
 
     private void creButtonArrCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonArrCreateActionPerformed
+        String eventType = creCBoxArr.getSelectedItem().toString();
+        String eventDate = creFieldArrDate.getText();
+        String comment = creTAreaArrComment.getText();
+
+        //ArrayList for checking the current code...
+        ArrayList<String> testArray = new ArrayList<>();
+        testArray.add("001");
+        testArray.add("002");
+
+        if(creFieldCusID.getText().equalsIgnoreCase("customer id")){
+            String fName = creFieldFName.getText();
+            String lName = creFieldLName.getText();
+            String mail = creFieldEmail.getText();
+            String phoneNo = creFieldPhoneNo.getText();
+            String address = creFieldAddress.getText();
+            int zip = Integer.parseInt(creFieldZIP.getText());
+
+            con.createCusArrangement(fName,lName,mail,phoneNo,address,zip,eventType,eventDate,comment,testArray);
+        }else{
+            long customerID = Long.parseLong(creFieldCusID.getText());
 
 
-
+        }
 
     }//GEN-LAST:event_creButtonArrCreateActionPerformed
 

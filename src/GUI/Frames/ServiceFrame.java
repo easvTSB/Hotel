@@ -501,6 +501,7 @@ public class ServiceFrame extends javax.swing.JInternalFrame {
 
             model2.addRow(row);
         }
+        servTableFood.clearSelection();
     }//GEN-LAST:event_servButtonAddFoodActionPerformed
 
     private void servButtonAddServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servButtonAddServiceActionPerformed
@@ -525,6 +526,7 @@ public class ServiceFrame extends javax.swing.JInternalFrame {
 
             model2.addRow(row);
         }
+        servTableService.clearSelection();
     }//GEN-LAST:event_servButtonAddServiceActionPerformed
 
     private void servButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servButtonCreateActionPerformed

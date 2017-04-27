@@ -9,5 +9,6 @@ public class Main {
     public static void main(String[] args) {
         LoginGUI gg = new LoginGUI(new LoginController(),new SystemGUI());
         gg.setVisible(true);
+        gg.setLocationRelativeTo(null);
     }
 }

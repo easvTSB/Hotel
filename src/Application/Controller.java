@@ -3,7 +3,9 @@ package Application;
 import Domain.Bookings.*;
 import Domain.*;
 import Technical.*;
+import com.sun.corba.se.impl.ior.OldJIDLObjectKeyTemplate;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,10 +18,8 @@ import static Technical.Encrypting.encrypt;
 public class Controller {
     private DBFacade db = new DBFacade();
 
-    public ArrayList<String> foodNames = new ArrayList<String>();
-    public ArrayList<String> foodDescriptions = new ArrayList<String>();
-    public ArrayList<Double> foodPrices = new ArrayList<Double>();
-    public ArrayList<String> staffFirstName = new ArrayList();
+    public Object [][] staff = new Object[30][9];
+    public Object [][] foodMenu = new Object[38][4];
 
     /**
      * Creates a new customer with bookings.
@@ -134,45 +134,54 @@ public class Controller {
         db.accountCreate(new Account(userName, password, userLevel));
     }
 
-    /** -------- FOOD MENU METHODS --------- */
+    public void viewStaff()throws SQLException{
 
-    public void viewNames()throws SQLException{
         db.stmt = db.con.createStatement();
-        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Food;");
-
-        for(int i = 0;i<30;i++){
-            foodNames.add(null);
-            foodDescriptions.add(null);
-            foodPrices.add(null);
-        }
-
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Staff;");
         int i = 0;
-        while (rs.next()) {   // only picking the first row
-            String foodName = rs.getString(1);
-            foodNames.add(i,foodName);
+        while (rs.next()) {
+            int id = rs.getInt(1);
+            String firstName = rs.getString(2);
+            String lastName = rs.getString(3);
+            String phoneNo = rs.getString(4);
+            String email = rs.getString(5);
+            Date startDate = rs.getDate(6);
+            String address = rs.getString(7);
+            int cityZip = rs.getInt(8);
+            String occupation = rs.getString(9);
 
-            String foodDescription = rs.getString(2);
-            foodDescriptions.add(i,foodDescription);
-
-            double foodPrice = rs.getDouble(3);
-            foodPrices.add(i,foodPrice);
+            staff[i][0]=id ;
+            staff[i][1]=firstName;
+            staff[i][2]=lastName;
+            staff[i][3]=phoneNo;
+            staff[i][4]=email;
+            staff[i][5]=startDate;
+            staff[i][6]=address;
+            staff[i][7]=cityZip;
+            staff[i][8]=occupation;
 
             i++;
         }
     }
 
-    public void viewStaff()throws SQLException {
+    /** -------- FOOD MENU METHODS --------- */
+
+
+    public void viewFood() throws SQLException{
+
         db.stmt = db.con.createStatement();
-        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Staff;");
-
-        for (int i = 0; i < 50; i++) {
-            staffFirstName.add(null);
-        }
-
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Food;");
         int i = 0;
         while (rs.next()) {
-            String firstName = rs.getString(2);
-            staffFirstName.add(i, firstName);
+            String foodName = rs.getString(1);
+            String foodDescription = rs.getString(2);
+            Double foodPrice = rs.getDouble(3);
+
+            foodMenu[i][0] = null;
+            foodMenu[i][1] = foodName;
+            foodMenu[i][2] = foodDescription;
+            foodMenu[i][3] = foodPrice;
+
             i++;
         }
     }

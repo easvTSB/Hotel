@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static Technical.Encrypting.encrypt;
 
@@ -17,7 +18,7 @@ import static Technical.Encrypting.encrypt;
  */
 public class Controller {
     private DBFacade db = new DBFacade();
-    //
+
     public Object[][] staff;
     public Object[][] jobs;
     public Object[][] foodMenu;
@@ -240,6 +241,11 @@ public class Controller {
 
     public void staffDelete(int staff_ID){
         db.staffDelete(staff_ID);
+    }
+
+    public void staffViewID(int staff_ID) {
+        staff = new Object[30][9];
+        this.staff = db.staffViewID(staff_ID,staff);
     }
 
     public void viewStaff() throws SQLException {

@@ -303,4 +303,39 @@ public class DBFacade {
             System.out.println(e.getMessage());
         }
     }
+
+    public Object[][] staffViewID(int staff_id, Object[][] staff) {
+        try {
+            cs = con.prepareCall("{call ViewStaffID(?)}");
+            cs.setInt(1,staff_id);
+            ResultSet rs = cs.executeQuery();
+            int i = 0;
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String firstName = rs.getString(2);
+                String email = rs.getString(3);
+                String phoneNo = rs.getString(4);
+                String address = rs.getString(5);
+                int cityZip = rs.getInt(6);
+                Date startDate = rs.getDate(7);
+                String userName = rs.getString(8);
+                String occupation = rs.getString(9);
+
+                staff[i][0] = id;
+                staff[i][1] = firstName;
+                staff[i][2] = email;
+                staff[i][3] = phoneNo;
+                staff[i][4] = address;
+                staff[i][5] = cityZip;
+                staff[i][6] = startDate;
+                staff[i][7] = userName;
+                staff[i][8] = occupation;
+
+                i++;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return staff;
+    }
 }

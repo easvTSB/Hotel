@@ -66,17 +66,19 @@ public class Controller {
 
     }
 
-    private void createArrangement(){
+    public void createArrangement(long customerID,String eventType,String eventDate, String comment, ArrayList<String> roomsBooked){
+        db.createArrangement(new Arrangement(eventType,1,false,comment), customerID);
+        for(int i = 0 ; i < roomsBooked.size(); i++){
+            db.createArrangementTransactionCus(new ArrangementTransactions(roomsBooked.get(i),eventDate));
+        }
+    }
+
+    public void createCusCatering(){
 
 
     }
 
-    private void createCusCatering(){
-
-
-    }
-
-    private void createCatering(){
+    public void createCatering(){
 
 
     }

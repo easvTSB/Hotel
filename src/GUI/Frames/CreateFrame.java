@@ -1113,8 +1113,7 @@ public class CreateFrame extends javax.swing.JInternalFrame {
             con.createCusArrangement(fName,lName,mail,phoneNo,address,zip,eventType,eventDate,comment,testArray);
         }else{
             long customerID = Long.parseLong(creFieldCusID.getText());
-
-
+            con.createArrangement(customerID,eventType,eventDate,comment,testArray);
         }
 
     }//GEN-LAST:event_creButtonArrCreateActionPerformed

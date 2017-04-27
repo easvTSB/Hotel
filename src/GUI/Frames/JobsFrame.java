@@ -207,6 +207,7 @@ public class JobsFrame extends javax.swing.JInternalFrame {
         con.jobCreate(jobFieldName.getText(),jobTAreaDesc.getText());
         updateTable();
         jobFieldName.setText("Name");
+        jobTAreaDesc.setText("");
     }
 
     private void jobFieldNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jobFieldNameFocusGained

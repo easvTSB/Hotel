@@ -233,7 +233,7 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
 
         empCBoxLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrator", "Employee" }));
 
-        empCBOXTitle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Receptionist", "Cook", "Administrator", " " }));
+        empCBOXTitle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Receptionist", "Chef", "Manager", "Janitor" }));
 
         jLabel21.setText("Employee ID:");
 

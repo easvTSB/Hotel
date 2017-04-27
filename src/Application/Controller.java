@@ -20,7 +20,8 @@ public class Controller {
     //
     public Object[][] staff;
     public Object[][] jobs;
-    public Object[][] foodMenu = new Object[38][4];
+    public Object[][] foodMenu;
+    public Object[][] bookingView;
 
     /**
      * Creates a new customer with bookings.
@@ -184,30 +185,34 @@ public class Controller {
         db.accountCreate(new Account(userName, password, userLevel));
     }
 
+    public void staffDelete(int staff_ID){
+        db.staffDelete(staff_ID);
+    }
+
     public void viewStaff() throws SQLException {
         staff = new Object[30][9];
         db.stmt = db.con.createStatement();
-        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Staff;");
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.ViewStaff;");
         int i = 0;
         while (rs.next()) {
             int id = rs.getInt(1);
             String firstName = rs.getString(2);
-            String lastName = rs.getString(3);
+            String email = rs.getString(3);
             String phoneNo = rs.getString(4);
-            String email = rs.getString(5);
-            Date startDate = rs.getDate(6);
-            String address = rs.getString(7);
-            int cityZip = rs.getInt(8);
+            String address = rs.getString(5);
+            int cityZip = rs.getInt(6);
+            Date startDate = rs.getDate(7);
+            String userName = rs.getString(8);
             String occupation = rs.getString(9);
 
             staff[i][0] = id;
             staff[i][1] = firstName;
-            staff[i][2] = lastName;
+            staff[i][2] = email;
             staff[i][3] = phoneNo;
-            staff[i][4] = email;
-            staff[i][5] = startDate;
-            staff[i][6] = address;
-            staff[i][7] = cityZip;
+            staff[i][4] = address;
+            staff[i][5] = cityZip;
+            staff[i][6] = startDate;
+            staff[i][7] = userName;
             staff[i][8] = occupation;
 
             i++;
@@ -215,12 +220,14 @@ public class Controller {
     }
 
 
+
+
     /**
      * -------- FOOD MENU METHODS ---------
      */
 
     public void viewFood() throws SQLException {
-
+        foodMenu = new Object[38][4];
         db.stmt = db.con.createStatement();
         ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Food;");
         int i = 0;
@@ -233,6 +240,30 @@ public class Controller {
             foodMenu[i][1] = foodName;
             foodMenu[i][2] = foodDescription;
             foodMenu[i][3] = foodPrice;
+
+            i++;
+        }
+    }
+
+    public void viewBooking() throws SQLException {
+        bookingView = new Object[42][6];
+        db.stmt = db.con.createStatement();
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Booking;");
+        int i = 0;
+        while (rs.next()) {
+            long booking_ID = rs.getLong(1);
+            long customer_ID = rs.getLong(2);
+            int staffID = rs.getInt(3);
+            Date bookingDate = rs.getDate(4);
+            boolean paid = rs.getBoolean(5);
+            String comments = rs.getString(6);
+
+            bookingView[i][0] = booking_ID;
+            bookingView[i][1] = customer_ID;
+            bookingView[i][2] = staffID;
+            bookingView[i][3] = bookingDate;
+            bookingView[i][4] = paid;
+            bookingView[i][5] = comments;
 
             i++;
         }

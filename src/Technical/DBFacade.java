@@ -13,8 +13,8 @@ public class DBFacade {
     private String password = "123456";
     private String port = "1433";
     private String databaseName = "Hotel";
-    public Connection con;
     public Statement stmt;
+    public Connection con;
     private PreparedStatement ps;
     public CallableStatement cs;
 
@@ -225,6 +225,17 @@ public class DBFacade {
             cs.setString(6,staff.getAddress());
             cs.setInt(7,staff.getZipCode());
             cs.setString(8,staff.getJobTitle());
+
+            cs.execute();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void staffDelete(int staff_id) {
+        try {
+            cs = con.prepareCall("{call DeleteStaffMember(?)}");
+            cs.setInt(1, staff_id);
 
             cs.execute();
         } catch (SQLException e) {

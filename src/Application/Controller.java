@@ -17,6 +17,7 @@ public class Controller {
     public ArrayList<String> foodNames = new ArrayList<String>();
     public ArrayList<String> foodDescriptions = new ArrayList<String>();
     public ArrayList<Double> foodPrices = new ArrayList<Double>();
+    public ArrayList<String> staffFirstName = new ArrayList();
 
     /**
      * Creates a new customer with bookings.
@@ -129,6 +130,21 @@ public class Controller {
             double foodPrice = rs.getDouble(3);
             foodPrices.add(i,foodPrice);
 
+            i++;
+        }
+    }
+    public void viewStaff()throws SQLException {
+        db.stmt = db.con.createStatement();
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Staff;");
+
+        for (int i = 0; i < 50; i++) {
+            staffFirstName.add(null);
+        }
+
+        int i = 0;
+        while (rs.next()) {
+            String firstName = rs.getString(2);
+            staffFirstName.add(i, firstName);
             i++;
         }
     }

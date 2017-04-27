@@ -78,7 +78,7 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
 
         empTable.setModel(new javax.swing.table.DefaultTableModel(con.staff,
             new String [] {
-                "Employee ID", "Name", "Email", "Phone No", "Address", "ZIP", "Start Date", "User Name", "User Level"
+                "Employee ID", "Name", "Email", "Phone No", "Address", "Zip code", "Start Date", "User Name", "User Level"
             }
         ) {
             Class[] types = new Class [] {

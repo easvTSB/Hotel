@@ -10,11 +10,11 @@ import java.sql.*;
 
 public class DBFacade {
     private String userName = "sa";
-    private String password = "123456";
+    private String password = "8520";
     private String port = "1433";
     private String databaseName = "Hotel";
-    public Connection con;
     public Statement stmt;
+    public Connection con;
     private PreparedStatement ps;
     public CallableStatement cs;
 

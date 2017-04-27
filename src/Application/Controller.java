@@ -185,6 +185,10 @@ public class Controller {
         db.accountCreate(new Account(userName, password, userLevel));
     }
 
+    public void staffDelete(int staff_ID){
+        db.staffDelete(staff_ID);
+    }
+
     public void viewStaff() throws SQLException {
         staff = new Object[30][9];
         db.stmt = db.con.createStatement();

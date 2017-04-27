@@ -8,6 +8,7 @@ package GUI.Frames;
 import Application.Controller;
 import Technical.DBFacade;
 
+import javax.swing.*;
 import java.sql.CallableStatement;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -216,7 +217,11 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         empButtonDelete.setText("Delete");
         empButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                empButtonDeleteActionPerformed(evt);
+                try {
+                    empButtonDeleteActionPerformed(evt);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -453,8 +458,12 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_empFieldDateFocusLost
 
-    private void empButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empButtonDeleteActionPerformed
+    private void empButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_empButtonDeleteActionPerformed
         // TODO add your handling code here:
+        int staff_ID = Integer.parseInt(empFieldEmpIDDelete.getText());
+        con.staffDelete(staff_ID);
+        empFieldEmpIDDelete.setText("Employee ID");
+        updateRow();
     }//GEN-LAST:event_empButtonDeleteActionPerformed
 
     private void empFieldCreateAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_empFieldCreateAddressFocusGained
@@ -558,6 +567,13 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         con.staffCreate(empFName,empLName,empPhoneno,empEmail,empAddress,empZIP,empTitle);
         con.accountCreate(empFName,empLName,empLevel);
         updateRow();
+
+        empFieldCreateFName.setText("First Name");
+        empFieldCreateLName.setText("Last Name");
+        empFieldCreatePhoneNo.setText("Phone No");
+        empFieldCreateEmail.setText("Email");
+        empFieldCreateAddress.setText("Address");
+        empFieldCreateZIP.setText("ZIP");
     }//GEN-LAST:event_empButtonCreateActionPerformed
 
     private void updateRow() throws SQLException {

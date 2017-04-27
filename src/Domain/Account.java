@@ -3,6 +3,7 @@ package Domain;
 import Technical.DBFacade;
 import Technical.Encrypting;
 
+import javax.swing.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,6 +30,7 @@ public class Account {
 
         generateUsername(fName,lName);
         generatePassword();
+        JOptionPane.showMessageDialog(null,"Username: "+getUserName()+"\nPassword: "+getPassword());
     }
 
     public Account(String username, String passWord){

@@ -19,6 +19,7 @@ public class Controller {
     private DBFacade db = new DBFacade();
     //
     public Object [][] staff;
+    public Object [][] jobs;
     public Object [][] foodMenu = new Object[38][4];
 
     /**
@@ -136,6 +137,21 @@ public class Controller {
         db.jobCreate(new Job(name,desc));
     }
 
+    public void viewJob() throws SQLException {
+        jobs = new Object[30][2];
+        db.stmt = db.con.createStatement();
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.JobTitle;");
+        int i = 0;
+        while (rs.next()) {
+            String title = rs.getString(1);
+            String desc = rs.getString(2);
+
+            jobs[i][0] = title ;
+            jobs[i][1] = desc;
+
+            i++;
+        }
+    }
     /** -------- STAFF METHODS --------- */
 
     public void staffCreate(String fName, String lName, String phoneNo, String email,

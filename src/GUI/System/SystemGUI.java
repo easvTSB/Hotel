@@ -263,7 +263,7 @@ public class SystemGUI extends javax.swing.JFrame {
 
     private void jMenuServiceOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuServiceOpenActionPerformed
         // TODO add your handling code here:
-        ServiceFrame s = new ServiceFrame();
+        ServiceFrame s = new ServiceFrame(control);
         desktop.add(s);
         s.setVisible(true);
     }//GEN-LAST:event_jMenuServiceOpenActionPerformed

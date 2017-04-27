@@ -22,6 +22,7 @@ public class Controller {
     public Object[][] staff = new Object[30][9];
     public Object[][] jobs;
     public Object[][] foodMenu;
+    public Object[][] service;
     public Object[][] bookingView;
     public Object[][] arrangementView;
 
@@ -319,4 +320,21 @@ public class Controller {
         db.foodDelete(foodName);
     }
 
+    public void viewService() throws SQLException {
+        service = new Object[38][4];
+        db.stmt = db.con.createStatement();
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.HotelService;");
+        int i = 0;
+        while (rs.next()) {
+            String foodName = rs.getString(1);
+            String foodDescription = rs.getString(2);
+            Double foodPrice = rs.getDouble(3);
+
+            service[i][0] = foodName;
+            service[i][1] = foodDescription;
+            service[i][2] = foodPrice;
+
+            i++;
+        }
+    }
 }

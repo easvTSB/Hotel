@@ -5,16 +5,31 @@
  */
 package GUI.Frames;
 
+import Application.Controller;
+
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import java.sql.SQLException;
+
 /**
  *
  * @author LPNielsen
  */
 public class ServiceFrame extends javax.swing.JInternalFrame {
+    private Controller con;
 
     /**
      * Creates new form ServiceFrame
      */
-    public ServiceFrame() {
+    public ServiceFrame(Controller con) {
+        this.con = con;
+        try {
+            con.viewFood();
+            con.viewService();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         initComponents();
     }
 
@@ -75,23 +90,10 @@ public class ServiceFrame extends javax.swing.JInternalFrame {
         });
 
         servTableService.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Name", "Description", "Price"
-            }
+                con.service,
+                new String[]{
+                        "Name", "Description", "Price"
+                }
         ) {
             Class[] types = new Class [] {
                 String.class, String.class, Double.class
@@ -119,23 +121,10 @@ public class ServiceFrame extends javax.swing.JInternalFrame {
         }
 
         servTableFood.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Name", "Description", "Price"
-            }
+                con.foodMenu,
+                new String[]{
+                        "Name", "Description", "Price"
+                }
         ) {
             Class[] types = new Class [] {
                 String.class, String.class, Double.class
@@ -184,37 +173,6 @@ public class ServiceFrame extends javax.swing.JInternalFrame {
 
         servTableOverview.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
             },
             new String [] {
                 "Name", "Description", "Price", "Quantity"
@@ -523,10 +481,50 @@ public class ServiceFrame extends javax.swing.JInternalFrame {
 
     private void servButtonAddFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servButtonAddFoodActionPerformed
         // TODO add your handling code here:
+        TableModel model1 = servTableFood.getModel();
+
+        int[] indexs = servTableFood.getSelectedRows();
+
+        Object[] row = new Object[4];
+
+        DefaultTableModel model2 = (DefaultTableModel) servTableOverview.getModel();
+
+        for(int i = 0; i < indexs.length; i++)
+        {
+            row[0] = model1.getValueAt(indexs[i], 0);
+
+            row[1] = model1.getValueAt(indexs[i], 1);
+
+            row[2] = model1.getValueAt(indexs[i], 2);
+
+            row[3] = 1;
+
+            model2.addRow(row);
+        }
     }//GEN-LAST:event_servButtonAddFoodActionPerformed
 
     private void servButtonAddServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servButtonAddServiceActionPerformed
         // TODO add your handling code here:
+        TableModel model1 = servTableService.getModel();
+
+        int[] indexs = servTableService.getSelectedRows();
+
+        Object[] row = new Object[4];
+
+        DefaultTableModel model2 = (DefaultTableModel) servTableOverview.getModel();
+
+        for(int i = 0; i < indexs.length; i++)
+        {
+            row[0] = model1.getValueAt(indexs[i], 0);
+
+            row[1] = model1.getValueAt(indexs[i], 1);
+
+            row[2] = model1.getValueAt(indexs[i], 2);
+
+            row[3] = 1;
+
+            model2.addRow(row);
+        }
     }//GEN-LAST:event_servButtonAddServiceActionPerformed
 
     private void servButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_servButtonCreateActionPerformed

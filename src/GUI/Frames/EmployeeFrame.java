@@ -18,7 +18,9 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
     /**
      * Creates new form Frame1
      */
-    public EmployeeFrame() throws SQLException {
+    public EmployeeFrame(Controller con) throws SQLException {
+        this.con = con;
+        con.viewStaff();
         initComponents();
     }
 
@@ -70,10 +72,10 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
 
         empTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
+                {null, con.staffFirstName.get(0), null, null, null, null, null, null, null},
+                {null, con.staffFirstName.get(1), null, null, null, null, null, null, null},
+                {null, con.staffFirstName.get(2), null, null, null, null, null, null, null},
+                {null, con.staffFirstName.get(3), null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -591,8 +593,6 @@ public class EmployeeFrame extends javax.swing.JInternalFrame {
         int empZIP = Integer.parseInt(empFieldCreateZIP.getText());
         String empTitle = empCBOXTitle.getSelectedItem().toString();
         String empLevel = empCBoxLevel.getSelectedItem().toString();
-
-        con = new Controller();
 
         con.staffCreate(empFName,empLName,empPhoneno,empEmail,empAddress,empZIP,empTitle);
         con.accountCreate(empFName,empLName,empLevel);

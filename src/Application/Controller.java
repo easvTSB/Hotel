@@ -4,14 +4,22 @@ import Domain.Bookings.*;
 import Domain.*;
 import Technical.*;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import static Technical.Encrypting.encrypt;
 
 /**
  * Created by LPNielsen on 26-Apr-17.
  */
 public class Controller {
     private DBFacade db = new DBFacade();
+
+    public ArrayList<String> foodNames = new ArrayList<String>();
+    public ArrayList<String> foodDescriptions = new ArrayList<String>();
+    public ArrayList<Double> foodPrices = new ArrayList<Double>();
+    public ArrayList<String> staffFirstName = new ArrayList();
 
     /**
      * Creates a new customer with bookings.
@@ -53,6 +61,8 @@ public class Controller {
 
     }
 
+    /** -------- ARRANGEMENT METHODS --------- */
+
     public void createCusArrangement(String firstName, String lastName, String mail, String phone, String address, int zip,
                                      String eventType,String eventDate, String comment, ArrayList<String> roomsBooked ){
 
@@ -72,6 +82,8 @@ public class Controller {
         }
     }
 
+    /** -------- CATERING METHODS --------- */
+
     public void createCusCatering(String firstName, String lastName, String mail, String phone, String address, int zip,
                                   String deliveryAddress, int zipDeliv, int peopleQuantity,String deliveryDate,String comment){
 
@@ -84,6 +96,8 @@ public class Controller {
 
     }
 
+    /** -------- STAFF METHODS --------- */
+
     public void staffCreate(String fName, String lName, String phoneNo, String email,
                             String address, int zipCode, String jobTitle) {
 
@@ -93,5 +107,48 @@ public class Controller {
 
     public void accountCreate(String userName, String password, String userLevel){
         db.accountCreate(new Account(userName, password, userLevel));
+    }
+
+    /** -------- FOOD MENU METHODS --------- */
+
+    public void viewNames()throws SQLException{
+        db.stmt = db.con.createStatement();
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Food;");
+
+        for(int i = 0;i<30;i++){
+            foodNames.add(null);
+            foodDescriptions.add(null);
+            foodPrices.add(null);
+        }
+
+        int i = 0;
+        while (rs.next()) {   // only picking the first row
+            String foodName = rs.getString(1);
+            foodNames.add(i,foodName);
+
+            String foodDescription = rs.getString(2);
+            foodDescriptions.add(i,foodDescription);
+
+            double foodPrice = rs.getDouble(3);
+            foodPrices.add(i,foodPrice);
+
+            i++;
+        }
+    }
+
+    public void viewStaff()throws SQLException {
+        db.stmt = db.con.createStatement();
+        ResultSet rs = db.stmt.executeQuery("SELECT * FROM dbo.Staff;");
+
+        for (int i = 0; i < 50; i++) {
+            staffFirstName.add(null);
+        }
+
+        int i = 0;
+        while (rs.next()) {
+            String firstName = rs.getString(2);
+            staffFirstName.add(i, firstName);
+            i++;
+        }
     }
 }

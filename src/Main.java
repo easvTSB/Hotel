@@ -8,7 +8,7 @@ import GUI.System.SystemGUI;
 public class Main {
     public static void main(String[] args) {
         netbeansDesign();
-        new LoginGUI(new LoginController(),new SystemGUI()).setVisible(true);
+        new LoginGUI(new SystemGUI()).setVisible(true);
     }
     static void netbeansDesign(){
         try {

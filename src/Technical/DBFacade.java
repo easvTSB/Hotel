@@ -1,5 +1,6 @@
 package Technical;
 
+import Application.LoginController;
 import Domain.Account;
 import Domain.Bookings.*;
 import Domain.Customer;
@@ -208,10 +209,6 @@ public class DBFacade {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public void loginAccount(Account acc){
-
     }
 
     public void jobCreate(Job job){

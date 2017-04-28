@@ -81,7 +81,11 @@ public class SystemGUI extends javax.swing.JFrame {
         jMenuFileLogOut.setText("Log Out");
         jMenuFileLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuFileLogOutActionPerformed(evt);
+                try {
+                    jMenuFileLogOutActionPerformed(evt);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
         jMenuFile.add(jMenuFileLogOut);
@@ -254,10 +258,10 @@ public class SystemGUI extends javax.swing.JFrame {
         mf.setVisible(true);
     }//GEN-LAST:event_jMenuManageMenuActionPerformed
 
-    private void jMenuFileLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileLogOutActionPerformed
+    private void jMenuFileLogOutActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jMenuFileLogOutActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        LoginGUI g = new LoginGUI(new LoginController(),new SystemGUI());
+        LoginGUI g = new LoginGUI(new SystemGUI());
         g.setVisible(true);
     }//GEN-LAST:event_jMenuFileLogOutActionPerformed
 

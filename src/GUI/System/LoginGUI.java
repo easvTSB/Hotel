@@ -14,15 +14,14 @@ import java.sql.SQLException;
  */
 public class LoginGUI extends javax.swing.JFrame {
     private int count = 0;
-    private LoginController logincontroller;
+    private LoginController lc;
     private SystemGUI systemgui;
     /**
      * Creates new form LoginGUI
      */
 
-    public LoginGUI(LoginController lc, SystemGUI sg) {
+    public LoginGUI(SystemGUI sg) {
         initComponents();
-        this.logincontroller = lc;
         this.systemgui = sg;
     }
 
@@ -146,9 +145,11 @@ public class LoginGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonLoginActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_loginButtonLoginActionPerformed
-        if (logincontroller.verifyLogin(loginUsername,loginPassword)){
+        this.lc = new LoginController(loginUsername.getText(),loginPassword.getPassword());
+
+        if (lc.isVerified()){
             systemgui = new SystemGUI();
-            switch (logincontroller.getUserLevel()){
+            switch (lc.getUserLevel()){
                 case "Administrator":
                     systemgui.adminView();
                     break;

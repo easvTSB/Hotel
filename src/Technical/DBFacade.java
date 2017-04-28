@@ -10,12 +10,12 @@ import java.sql.*;
 
 public class DBFacade {
     private String userName = "sa";
-    private String password = "seba0830";
+    private String password = "123456";
     private String port = "1433";
     private String databaseName = "Hotel";
     public Statement stmt;
     public Connection con;
-    public PreparedStatement ps;
+    private PreparedStatement ps;
     public CallableStatement cs;
 
     public DBFacade() {
@@ -208,55 +208,6 @@ public class DBFacade {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public ResultSet viewBookingAll() throws SQLException {
-            stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Booking");
-
-        return rs;
-    }
-
-    public ResultSet viewBookingTransactionAll() throws SQLException {
-        stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM BookingTransactions");
-
-        return rs;
-    }
-
-    public ResultSet viewCustomerAll() throws SQLException {
-        stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM Customer");
-
-        return rs;
-    }
-
-    public ResultSet viewArrangementAll() throws SQLException {
-        stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM Arrangement");
-
-        return rs;
-    }
-
-    public ResultSet viewArrangementTransactionsAll() throws SQLException {
-        stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM ArrangementTransactions");
-
-        return rs;
-    }
-
-    public ResultSet viewCateringAll() throws SQLException {
-        stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM CateringOrder");
-
-        return rs;
-    }
-
-    public ResultSet viewCateringTransactionsAll() throws SQLException {
-        stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM FoodOrderCatering");
-
-        return rs;
     }
 
     public void loginAccount(Account acc){

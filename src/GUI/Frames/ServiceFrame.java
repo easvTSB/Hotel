@@ -18,6 +18,7 @@ import java.sql.SQLException;
  */
 public class ServiceFrame extends javax.swing.JInternalFrame {
     private Controller con;
+    private double price = 0;
 
     /**
      * Creates new form ServiceFrame
@@ -489,6 +490,8 @@ public class ServiceFrame extends javax.swing.JInternalFrame {
 
         DefaultTableModel model2 = (DefaultTableModel) servTableOverview.getModel();
 
+
+
         for(int i = 0; i < indexs.length; i++)
         {
             row[0] = model1.getValueAt(indexs[i], 0);
@@ -497,10 +500,14 @@ public class ServiceFrame extends javax.swing.JInternalFrame {
 
             row[2] = model1.getValueAt(indexs[i], 2);
 
+            price += (double) row[2];
+
             row[3] = 1;
 
             model2.addRow(row);
         }
+
+        servLabelTotalPrice.setText(""+price);
         servTableFood.clearSelection();
     }//GEN-LAST:event_servButtonAddFoodActionPerformed
 
@@ -522,10 +529,14 @@ public class ServiceFrame extends javax.swing.JInternalFrame {
 
             row[2] = model1.getValueAt(indexs[i], 2);
 
+            price += (double) row[2];
+
             row[3] = 1;
 
             model2.addRow(row);
         }
+
+        servLabelTotalPrice.setText(""+price);
         servTableService.clearSelection();
     }//GEN-LAST:event_servButtonAddServiceActionPerformed
 

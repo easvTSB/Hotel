@@ -1,9 +1,5 @@
 package Technical;
 
-import Application.Creator;
-import Domain.Account;
-
-import javax.swing.*;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;

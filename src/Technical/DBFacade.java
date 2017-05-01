@@ -10,12 +10,12 @@ import java.sql.*;
 
 public class DBFacade {
     private String userName = "sa";
-    private String password = "123456";
+    private String password = "seba0830";
     private String port = "1433";
     private String databaseName = "Hotel";
     public Statement stmt;
     public Connection con;
-    private PreparedStatement ps;
+    public PreparedStatement ps;
     public CallableStatement cs;
 
     public DBFacade() {
@@ -208,6 +208,31 @@ public class DBFacade {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public Object[][] viewRoomsWithType(String roomType, Object[][] rooms){
+        try {
+            cs = con.prepareCall("{call SelectRooms_WithType(?)}");
+            cs.setString(1,roomType);
+            ResultSet rs = cs.executeQuery();
+            int i = 0;
+            while (rs.next()) {
+                String roomNo= rs.getString(1);
+                String type = rs.getString(2);
+                String desc = rs.getString(3);
+                double price = rs.getDouble(4);
+
+                rooms[i][0] = roomNo;
+                rooms[i][1] = type;
+                rooms[i][2] = desc;
+                rooms[i][3] = price;
+
+                i++;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return rooms;
     }
 
     public void loginAccount(Account acc){

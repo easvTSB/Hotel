@@ -169,7 +169,11 @@ public class SystemGUI extends javax.swing.JFrame {
         jMenuCreateOpen.setText("Open");
         jMenuCreateOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuCreateOpenActionPerformed(evt);
+                try {
+                    jMenuCreateOpenActionPerformed(evt);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
         jMenuCreate.add(jMenuCreateOpen);
@@ -244,7 +248,7 @@ public class SystemGUI extends javax.swing.JFrame {
         arr.setVisible(true);
     }//GEN-LAST:event_jMenuViewArrActionPerformed
 
-    private void jMenuCreateOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuCreateOpenActionPerformed
+    private void jMenuCreateOpenActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_jMenuCreateOpenActionPerformed
         // TODO add your handling code here:
         CreateFrame cr = new CreateFrame(control);
         desktop.add(cr);

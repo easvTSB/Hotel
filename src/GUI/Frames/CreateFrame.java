@@ -8,7 +8,9 @@ package GUI.Frames;
 import Application.Controller;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
 import java.awt.CardLayout;
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -22,9 +24,11 @@ public class CreateFrame extends javax.swing.JInternalFrame {
     /**
      * Creates new form CreateFrame
      */
-    public CreateFrame(Controller controller) {
+    public CreateFrame(Controller controller) throws SQLException {
 
         con = controller;
+        con.viewRooms();
+        con.viewFood();
         initComponents();        
         cl = new CardLayout();
         creCPanelEvent.setLayout(cl);
@@ -142,23 +146,7 @@ public class CreateFrame extends javax.swing.JInternalFrame {
         });
 
         creTableArr.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
+            con.rooms,
             new String [] {
                 "Room No", "Room Type", "Description", "Price", "Select"
             }
@@ -202,7 +190,11 @@ public class CreateFrame extends javax.swing.JInternalFrame {
         creButtonArrSearch.setText("Search");
         creButtonArrSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                creButtonArrSearchActionPerformed(evt);
+                try {
+                    creButtonArrSearchActionPerformed(evt);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -297,7 +289,7 @@ public class CreateFrame extends javax.swing.JInternalFrame {
         });
 
         creTableBook.setModel(new javax.swing.table.DefaultTableModel(
-                con.viewRoomsArrangement(creCBoxArr.getSelectedItem().toString(),creFieldArrDate.getText()),
+                con.rooms,
             new String [] {
                 "Room No", "Room Type", "Description", "Price", "Select"
             }
@@ -349,7 +341,11 @@ public class CreateFrame extends javax.swing.JInternalFrame {
         creButtonBookSearch.setText("Search");
         creButtonBookSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                creButtonBookSearchActionPerformed(evt);
+                try {
+                    creButtonBookSearchActionPerformed(evt);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -486,7 +482,7 @@ public class CreateFrame extends javax.swing.JInternalFrame {
         });
 
         creTableCat.setModel(new javax.swing.table.DefaultTableModel(
-            con.viewFoodcatering(),
+            con.foodMenu,
             new String [] {
                 "Name", "Description", "Price", "Quantity"
             }
@@ -1063,8 +1059,8 @@ public class CreateFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_creFieldCatAmountFocusLost
 
-    private void creButtonArrSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonArrSearchActionPerformed
-
+    private void creButtonArrSearchActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_creButtonArrSearchActionPerformed
+    updateTableArr(creCBoxArr.getSelectedItem().toString());
 
     }//GEN-LAST:event_creButtonArrSearchActionPerformed
 
@@ -1073,10 +1069,7 @@ public class CreateFrame extends javax.swing.JInternalFrame {
         String eventDate = creFieldArrDate.getText();
         String comment = creTAreaArrComment.getText();
 
-        //ArrayList for checking the current code...
-        ArrayList<String> testArray = new ArrayList<>();
-        testArray.add("001");
-        testArray.add("002");
+        ArrayList<String> selectedRooms = getSelectedRoom(creTableArr);
 
         if(creFieldCusID.getText().equalsIgnoreCase("customer id")){
             String fName = creFieldFName.getText();
@@ -1086,16 +1079,18 @@ public class CreateFrame extends javax.swing.JInternalFrame {
             String address = creFieldAddress.getText();
             int zip = Integer.parseInt(creFieldZIP.getText());
 
-            con.createCusArrangement(fName,lName,mail,phoneNo,address,zip,eventType,eventDate,comment,testArray);
+            con.createCusArrangement(fName,lName,mail,phoneNo,address,zip,eventType,eventDate,comment,selectedRooms);
         }else{
             long customerID = Long.parseLong(creFieldCusID.getText());
-            con.createArrangement(customerID,eventType,eventDate,comment,testArray);
+            con.createArrangement(customerID,eventType,eventDate,comment,selectedRooms);
         }
+        JOptionPane.showMessageDialog(this,"Arrangement was succesfully created");
+        clearFields();
 
     }//GEN-LAST:event_creButtonArrCreateActionPerformed
 
-    private void creButtonBookSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creButtonBookSearchActionPerformed
-
+    private void creButtonBookSearchActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_creButtonBookSearchActionPerformed
+    updateTableBoo(creCBoxBook.getSelectedItem().toString());
 
 
     }//GEN-LAST:event_creButtonBookSearchActionPerformed
@@ -1106,10 +1101,8 @@ public class CreateFrame extends javax.swing.JInternalFrame {
         String checkOut = creFieldBookDateTo.getText();
         String comment = creTAreaBookComment.getText();
 
-        //ArrayList for checking the current code...
-        ArrayList<String> testArray = new ArrayList<>();
-        testArray.add("101");
-        testArray.add("102");
+
+        ArrayList<String> testArray = getSelectedRoom(creTableBook);
 
         if(creFieldCusID.getText().equalsIgnoreCase("customer id")){
             String fName = creFieldFName.getText();
@@ -1125,6 +1118,8 @@ public class CreateFrame extends javax.swing.JInternalFrame {
 
             con.createBooking(customerID,checkIn,checkOut,comment,testArray);
         }
+        JOptionPane.showMessageDialog(this,"Booking was succesfully created");
+        clearFields();
 
     }//GEN-LAST:event_creButtonBookCreateActionPerformed
 
@@ -1158,11 +1153,91 @@ public class CreateFrame extends javax.swing.JInternalFrame {
 
             con.createCatering(customerID,deliveryAddress,zipDelivery,amountOfPeople,deliveryTime,deliveryDate,comment,foodItems,quantity);
         }
-
-
+        JOptionPane.showMessageDialog(this,"Catering was succesfully created");
+        clearFields();
 
     }//GEN-LAST:event_creButtonCatCreateActionPerformed
 
+    private ArrayList<String> getSelectedRoom(JTable table){
+        ArrayList<String> roomsChosen = new ArrayList<>();
+        for (int i = 0; i < table.getModel().getRowCount(); i++) {
+                Boolean addRoom = (Boolean) table.getModel().getValueAt(i,4);
+                if (addRoom == null || addRoom == false) {
+
+                } else{
+                    roomsChosen.add((String)table.getModel().getValueAt(i,0));
+                    System.out.println(roomsChosen.toString());
+                }
+        }
+        return roomsChosen;
+    }
+
+    private void updateTableBoo(String roomType) throws SQLException {
+        con.viewRoomsAvailable(roomType);
+        creTableBook.setModel(new javax.swing.table.DefaultTableModel(
+                con.rooms
+                ,new String [] {
+                "Room No", "Room Type", "Description", "Price", "Select"
+        }
+        ) {
+            Class[] types = new Class [] {
+                    String.class, String.class, String.class, Double.class, Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                    false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+    }
+
+    private void clearFields(){
+        creFieldAddress.setText("");
+        creFieldArrDate.setText("");
+        creFieldBookDateFrom.setText("");
+        creFieldBookDateTo.setText("");
+        creFieldCatAddress.setText("");
+        creFieldCatAmount.setText("");
+        creFieldCatDate.setText("");
+        creFieldCatZIP.setText("");
+        creFieldCusID.setText("Customer ID");
+        creFieldEmail.setText("");
+        creFieldFName.setText("");
+        creFieldLName.setText("");
+        creFieldPhoneNo.setText("");
+        creFieldZIP.setText("");
+    }
+
+    private void updateTableArr(String roomType) throws SQLException {
+        con.viewRoomsAvailable(creCBoxArr.getSelectedItem().toString());
+        creTableArr.setModel(new javax.swing.table.DefaultTableModel(
+                con.rooms
+                ,new String [] {
+                        "Room No", "Room Type", "Description", "Price", "Select"
+                }
+        ) {
+            Class[] types = new Class [] {
+                    String.class, String.class, String.class, Double.class, Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                    false, false, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
